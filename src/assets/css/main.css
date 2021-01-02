@@ -11,6 +11,12 @@
 
 @font-face {
     font-family: "Roboto";
+    src: url("../fonts/Roboto/Roboto-Thin.ttf");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: "Roboto";
     src: url("../fonts/Roboto/Roboto-Italic.ttf");
     font-style: italic, oblique;
 }
@@ -27,8 +33,38 @@
     src: url("../fonts/Roboto/Roboto-Regular.ttf");
 }
 
+@font-face {
+    font-family: "OpenDyslexic";
+    src: url("../fonts/OpenDyslexic/OpenDyslexic-Regular.otf");
+}
+
+@font-face {
+    font-family: "OpenDyslexic";
+    src: url("../fonts/OpenDyslexic/OpenDyslexic-Bold.otf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "OpenDyslexic";
+    src: url("../fonts/OpenDyslexic/OpenDyslexic-Italic.otf");
+    font-style: italic, oblique;
+}
+
+@font-face {
+    font-family: "OpenDyslexic";
+    src: url("../fonts/OpenDyslexic/OpenDyslexic-BoldItalic.otf");
+    font-weight: bold;
+    font-style: italic, oblique;
+}
+
+@font-face {
+    font-family: "OpenDyslexic";
+    src: url("../fonts/OpenDyslexic/OpenDyslexic-Regular.otf");
+}
+
 * {
-    font-family: 'Roboto'
+    font-family: 'Roboto !important';
+    font-weight: 100;
 }
 
 html,

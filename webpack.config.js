@@ -8,10 +8,10 @@ module.exports = {
     main: __dirname + '/src/index.js',
     scene: __dirname + '/src/mainScene.js',
     landing: __dirname + '/src/scenes/landing.js',
-    helper: __dirname + '/src/helper.js',
-    meshCreator: __dirname + '/src/meshCreator.js',
-    sphereCreator: __dirname + '/src/creators/sphere.js',
-    edgesCreator: __dirname + '/src/creators/edge.js',
+    brain: __dirname + '/src/imports/brain.js',
+    brainGUI: __dirname + '/src/GUI/brain.js',
+    landingGUI: __dirname + '/src/GUI/landing.js',
+    helper: __dirname + '/src/helper.js'
   },
   output: {
     filename: '[name].js',
@@ -37,7 +37,7 @@ module.exports = {
         },
         {
           from: __dirname + '/src/assets/fonts/',
-          to: __dirname + '/dist/fonts',
+          to: __dirname + '/dist/assets/fonts',
         },
         {
           from: __dirname + '/src/assets/models/',
@@ -45,7 +45,7 @@ module.exports = {
         },
         {
           from: __dirname + '/src/assets/css/',
-          to: __dirname + '/dist/css',
+          to: __dirname + '/dist/assets/css',
         },
       ],
     }),
@@ -73,9 +73,16 @@ module.exports = {
           },
         ],
       },
+      {    
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        loader: "file-loader"
+      },
+      {
+        test: /\.(css)$/,
+        use: ["css-loader"]
+      },
       {
         test: /\.js$/,
-        enforce: 'pre',
         use: ['source-map-loader'],
       },
     ],

@@ -1,72 +1,62 @@
 import * as BABYLON from 'babylonjs'
+import {getGUIBrainPart} from '../GUI/brain'
 import 'babylonjs-loaders'
 
-export const importCenterBrain = (scene) => {
-    let centerBrain
-    BABYLON.SceneLoader.LoadAssetContainer("/assets/models/", "CX.obj", scene, (assets) => {
-        assets.addAllToScene()
-        centerBrain=assets.meshes[0]
-        centerBrain.scaling = new BABYLON.Vector3(30,30,30)
+const SCALE = new BABYLON.Vector3(30,30,30)
 
-        let animationCenterBrainEnter = new BABYLON.Animation("animationCenterBrainEnter", "position.y", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
-        let animationCenterBrainEnterKeys = []
-        animationCenterBrainEnterKeys.push({
-        frame: 0,
-        value: 0
-        });
-        animationCenterBrainEnterKeys.push({
-        frame: 50,
-        value: -7.5
-        });
-        animationCenterBrainEnter.setKeys(animationCenterBrainEnterKeys)
-        centerBrain.animations.push(animationCenterBrainEnter)
-        scene.beginAnimation(centerBrain, 0, 50, false)
-        return centerBrain
-    }); 
+const getAnimationParams = (fileName) => {
+    let params = {
+        type:'',
+        keys:[{frame:0, value:0}]
+    }
+    switch (fileName) {
+        case 'CX':
+            params.type = "position.y"
+            params.keys.push({
+                frame: 50,
+                value: -5
+            }) 
+            break;
+        case 'LX':
+            params.type = "position.x"
+            params.keys.push({
+                frame: 50,
+                value: 5
+            }) 
+            break;
+        case 'RX':
+            params.type = "position.x"
+            params.keys.push({
+                frame: 50,
+                value: -5
+            }) 
+            break;
+        default:
+            console.log(`No animation params for filename ${fileName}`)
+    }
+    return params
 }
-export const importLeftBrain = (scene) => {
-    let leftBrain
-    BABYLON.SceneLoader.LoadAssetContainer("/assets/models/", "LX.obj", scene, (assets) => {
+export const importBrainPart = (fileName, scene, advancedTexture) => 
+new Promise((resolve, reject) => {
+    BABYLON.SceneLoader.LoadAssetContainer("/assets/models/", `${fileName}.obj`, scene, (assets) => {
         assets.addAllToScene()
-        leftBrain=assets.meshes[0]
-        leftBrain.scaling = new BABYLON.Vector3(30,30,30)
-
-        let animationLeftBrainEnter = new BABYLON.Animation("animationLeftBrainEnter", "position.x", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
-        let animationLeftBrainEnterKeys = []
-        animationLeftBrainEnterKeys.push({
-            frame: 0,
-            value: 0
-        });
-        animationLeftBrainEnterKeys.push({
-            frame: 50,
-            value: 7.5
-        });
-        animationLeftBrainEnter.setKeys(animationLeftBrainEnterKeys)
-        leftBrain.animations.push(animationLeftBrainEnter)
-        scene.beginAnimation(leftBrain, 0, 50, false)
-        return leftBrain
-    }); 
-}
-export const importRightBrain = (scene) => {
-    let rightBrain
-    BABYLON.SceneLoader.LoadAssetContainer("/assets/models/", "RX.obj", scene, (assets) => {
-        assets.addAllToScene()
-        rightBrain=assets.meshes[0]
-        rightBrain.scaling = new BABYLON.Vector3(30,30,30)
+        let importedBrainPart=assets.meshes[0]
+        importedBrainPart.scaling = SCALE
     
-        let animationRightBrainEnter = new BABYLON.Animation("animationRightBrainEnter", "position.x", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
-        let animationRightBrainEnterKeys = []
-        animationRightBrainEnterKeys.push({
-          frame: 0,
-          value: 0
-        });
-        animationRightBrainEnterKeys.push({
-          frame: 50,
-          value: -7.5
-        });
-        animationRightBrainEnter.setKeys(animationRightBrainEnterKeys)
-        rightBrain.animations.push(animationRightBrainEnter)
-        scene.beginAnimation(rightBrain, 0, 50, false)
-        return rightBrain
+        let animationParams = getAnimationParams(fileName)
+        let animation = new BABYLON.Animation(`${fileName}-animation`, animationParams.type, 50, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+        animation.setKeys(animationParams.keys)
+        importedBrainPart.animations.push(animation)
+        scene.beginAnimation(importedBrainPart, 0, 50, false)
+
+        const gUi = getGUIBrainPart(fileName, importedBrainPart, advancedTexture)
+        importedBrainPart.setAlpha = (value) => {
+            gUi.label.alpha = value
+            gUi.line.alpha = value
+            gUi.endRound.alpha = value
+        }
+
+        importedBrainPart.setAlpha(0)
+        resolve(importedBrainPart)
     }); 
-}
+})

@@ -16,6 +16,7 @@
     "cannon": "^0.6.2",
     "copy-webpack-plugin": "^6.0.3",
     "cors": "^2.8.5",
+    "css-loader": "^5.0.1",
     "express": "^4.17.1",
     "npx": "^10.2.2",
     "webpack": "^4.43.0",
@@ -26,9 +27,11 @@
     "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
     "chai": "^4.2.0",
+    "file-loader": "^6.2.0",
     "mocha": "^8.0.1",
     "mocha-webpack": "^1.1.0",
     "source-map-loader": "^1.1.0",
+    "ttf-loader": "^1.0.2",
     "webpack-dev-server": "^3.11.0",
     "webpack-node-externals": "^2.5.0"
   }
