@@ -11,7 +11,7 @@ module.exports = {
     brain: __dirname + '/src/imports/brain.js',
     brainGUI: __dirname + '/src/GUI/brain.js',
     landingGUI: __dirname + '/src/GUI/landing.js',
-    helper: __dirname + '/src/helper.js'
+    helper: __dirname + '/src/common/helper.js'
   },
   output: {
     filename: '[name].js',

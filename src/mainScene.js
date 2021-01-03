@@ -1,24 +1,24 @@
 import * as BABYLON from 'babylonjs'
-import * as GUI from 'babylonjs-gui'
-import { getNewScene } from './helper'
-
+import queryString from 'query-string'
+import { getNewScene } from './common/helper'
 import { Create as Landing } from './scenes/landing'
+import { Create as Experiences } from './scenes/esperiences'
 
 const canvas = document.getElementById('renderCanvas')
 export const Create = (engine, report) => {
     const space_size = Object.keys(report).length
     const scene = getNewScene(engine)
-    const queryString = window.location.search
     let container = new BABYLON.AssetContainer(scene)
-    
-    // GUI
-    let advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI("MainUi")
+    const parsed = queryString.parse(location.search)
 
-    console.log(queryString)
-    if(queryString) {
-      Test(engine, scene, canvas, container, report, space_size)
-    } else {
-      Landing(engine, scene, canvas, container,  report, space_size)
+    console.log('Routing to:',parsed)
+    switch (parsed.root) {
+      case 'experiences':
+        Experiences(engine, scene, canvas, container,  report, space_size)
+        break;
+      default:
+        Landing(engine, scene, canvas, container,  report, space_size)
+        break;
     }
 
     scene.registerBeforeRender(function () {
