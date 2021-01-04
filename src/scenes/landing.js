@@ -2,12 +2,13 @@ import * as BABYLON from 'babylonjs'
 import * as GUI from 'babylonjs-gui'
 import { getGUILandingPage } from '../GUI/landing'
 import { importBrainPart } from '../imports/brain'
+import { importPaperHouse } from '../imports/paperHouse'
 import { getNewCamera, getNewLight } from '../common/helper'
 BABYLON.Logger.LogLevels = 3
 
 let selected = undefined
-let onPointerEnterObservableOldListener = []
-let onPointerOutObservableOldListener = []
+let root = ''
+let rootRendered = false
 
 const setBtnListeners = (btnCenterBrain, btnLeftBrain, btnRightBrain, back, centerBrain, leftBrain, rightBrain, camera) => {
   btnCenterBrain.onPointerEnterObservable.add(() => {
@@ -26,6 +27,7 @@ const setBtnListeners = (btnCenterBrain, btnLeftBrain, btnRightBrain, back, cent
   });
   btnCenterBrain.onPointerClickObservable.add(() => {
     if(selected) return
+    root = 'center'
     selected = btnCenterBrain
     btnCenterBrain.color = "#018786"
     centerBrain.setAlpha(0)
@@ -56,6 +58,7 @@ const setBtnListeners = (btnCenterBrain, btnLeftBrain, btnRightBrain, back, cent
   })
   btnLeftBrain.onPointerClickObservable.add(() => {
     if(selected) return
+    root = 'left'
     selected = btnLeftBrain
     btnLeftBrain.color = "#018786"
     rightBrain.setAlpha(0)
@@ -86,6 +89,7 @@ const setBtnListeners = (btnCenterBrain, btnLeftBrain, btnRightBrain, back, cent
   });
   btnRightBrain.onPointerClickObservable.add(() => {
     if(selected) return
+    root = 'right'
     selected = btnRightBrain
     btnRightBrain.color = "#018786"
     leftBrain.setAlpha(0)
@@ -101,6 +105,7 @@ const setBtnListeners = (btnCenterBrain, btnLeftBrain, btnRightBrain, back, cent
   });
   back.onPointerClickObservable.add(() => {
     if(!selected) return
+    root = ''
     btnCenterBrain.color = 'black'
     btnRightBrain.color = 'black'
     btnLeftBrain.color = 'black'
@@ -136,19 +141,49 @@ export const Create = (
     let {btnCenterBrain, btnLeftBrain, btnRightBrain, back} = getGUILandingPage(advancedTexture)
     setBtnListeners(btnCenterBrain, btnLeftBrain, btnRightBrain, back, centerBrain, leftBrain, rightBrain, camera)
   
-    camera.setPosition(new BABYLON.Vector3(0,5,30))
-    camera.setTarget(new BABYLON.Vector3(0,0,0))
-  
-    container.meshes.push(centerBrain)
-    container.meshes.push(leftBrain)
-    container.meshes.push(rightBrain)
     container.cameras.push(camera)
     container.lights.push(light)
-  
+    camera.setPosition(new BABYLON.Vector3(0,5,30))
+    camera.setTarget(new BABYLON.Vector3(0,0,0))
+    let rootRendered = false
+
     scene.registerBeforeRender(function () {
-      camera.alpha += .00075
+      switch (root) {
+        case 'right':
+          break;
+        case 'left':
+          break;
+        case 'center':
+          if(rootRendered) return
+          rootRendered = true
+          importPaperHouse(scene).then(paperHouse => {
+            console.log('paperHouse',paperHouse)
+            paperHouse.forEach(mesh => {
+              container.meshes.push(mesh)
+            })
+          })
+          camera.setPosition(new BABYLON.Vector3(0,7.5,7.5))
+          camera.setTarget(new BABYLON.Vector3(0,5,0))
+          break;
+      
+        default:
+          if(rootRendered){
+            camera.setPosition(new BABYLON.Vector3(0,5,30))
+            camera.setTarget(new BABYLON.Vector3(0,0,0))
+            console.log(container.meshes.length, 'mesh to remove')
+            if(container.meshes) container.meshes.forEach((element, index) => {
+              element.dispose()
+            });
+            rootRendered = false
+          }
+          camera.alpha += .00075
+          break;
+      }
     })
-  
+    scene.ambientColor = new BABYLON.Color3(0.25, 0.25, 0.25)
+    scene.fogMode = BABYLON.Scene.FOGMODE_EXP
+    scene.fogColor = new BABYLON.Color3(0.9, 0.9, 0.8)
+    scene.fogDensity = 0.01
     return scene
   })
 }
