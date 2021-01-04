@@ -2,7 +2,7 @@ import * as BABYLON from 'babylonjs'
 import * as GUI from 'babylonjs-gui'
 import { getGUILandingPage } from '../GUI/landing'
 import { importBrainPart } from '../imports/brain'
-import { importPaperHouse } from '../imports/paperHouse'
+import { importLightHouse } from '../imports/lightHouse'
 import { getNewCamera, getNewLight } from '../common/helper'
 BABYLON.Logger.LogLevels = 3
 
@@ -156,7 +156,7 @@ export const Create = (
         case 'center':
           if(rootRendered) return
           rootRendered = true
-          importPaperHouse(scene).then(paperHouse => {
+          importLightHouse(scene).then(paperHouse => {
             console.log('paperHouse',paperHouse)
             paperHouse.forEach(mesh => {
               container.meshes.push(mesh)

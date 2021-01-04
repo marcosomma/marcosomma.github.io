@@ -9,6 +9,7 @@ module.exports = {
     scene: __dirname + '/src/mainScene.js',
     landing: __dirname + '/src/scenes/landing.js',
     brain: __dirname + '/src/imports/brain.js',
+    lightHouse: __dirname + '/src/imports/lightHouse.js',
     brainGUI: __dirname + '/src/GUI/brain.js',
     landingGUI: __dirname + '/src/GUI/landing.js',
     helper: __dirname + '/src/common/helper.js'

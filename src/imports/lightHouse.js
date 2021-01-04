@@ -2,7 +2,7 @@ import * as BABYLON from 'babylonjs'
 import 'babylonjs-loaders'
 
 const SCALE = new BABYLON.Vector3(10,10,10)
-export const importPaperHouse = ( scene ) => 
+export const importLightHouse = ( scene ) => 
 new Promise((resolve, reject) => {
     BABYLON.SceneLoader.LoadAssetContainer("/assets/models/", `Lighthouse.obj`, scene, (assets) => {
         assets.addAllToScene()
