@@ -16,7 +16,9 @@ const renderScene = (json) => {
   try {
     // Start render loop
     engine.runRenderLoop(() => {
+      engine.beginFrame()
       scene.render()
+      engine.endFrame()
     })
 
     // Babylonjs trigger resize event
