@@ -43,8 +43,8 @@ const getTexts = (fileName) => {
     }
     switch (fileName) {
         case 'CX':
-            text.header = 'Center'
-            text.mainText = 'Aenean sit amet ligula ac tortor pharetra tristique. Maecenas mollis eget nulla id tincidunt. Praesent semper iaculis ligula. \nUt aliquet rutrum justo vel lobortis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi dapibus dui et orci commodo semper. Praesent eget porttitor libero. Phasellus volutpat ultrices feugiat.'
+            text.header = 'Amygdala, Hippocampus, Thalamus and Hypothalamus'
+            text.mainText = 'The amygdala is the emotion center of the brain, while the hippocampus plays an essential role in the formation of new memories about past experiences. The thalamus and hypothalamus are associated with changes in emotional reactivity.'
             text.cit = 'Maecenas mollis eget nulla id tincidunt. Praesent semper iaculis ligula. '
             text.citAuth = 'cit. I Lore'
             break;
@@ -56,7 +56,7 @@ const getTexts = (fileName) => {
             break;
         case 'RX':
             text.header = 'Left Hemisphere:'
-            text.mainText = 'Responsible for control of the right side of the body, and is the more academic and logical side of the brain. \nAliquam tempor mauris a aliquet interdum. Morbi viverra fermentum velit ac bibendum. Integer id porta dolor, non elementum massa. Proin vitae scelerisque velit, sit amet cursus arcu. Etiam ac sollicitudin lorem.'
+            text.mainText = "Responsible for control of the right side of the body, and is the more academic and logical side of the brain. \nIt's also controlling, Analytic thought, Logic, Language, Reasoning, Science and math, Written, Numbers skills and much more..."
             text.cit = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
             text.citAuth = 'cit. L Ipsum'
             break;

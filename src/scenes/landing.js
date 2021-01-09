@@ -1,8 +1,14 @@
 import * as BABYLON from 'babylonjs'
 import * as GUI from 'babylonjs-gui'
 import { getGUILandingPage } from '../GUI/landing'
-import { importBrainPart } from '../imports/brain'
-import { importLightHouse } from '../imports/lightHouse'
+import {
+  importBrainPart,
+  importLightHouse,
+  importDesk,
+  importRobot,
+  importYashica,
+  importCreative
+} from '../imports'
 import { getNewCamera, getNewLight } from '../common/helper'
 BABYLON.Logger.LogLevels = 3
 
@@ -138,26 +144,50 @@ export const Create = (
     importBrainPart('LX', scene, advancedTexture)
   ]).then((values)=>{
     let [centerBrain, leftBrain, rightBrain] = values
-    let {btnCenterBrain, btnLeftBrain, btnRightBrain, back} = getGUILandingPage(advancedTexture)
+    let {panel, panelBorder, btnCenterBrain, btnLeftBrain, btnRightBrain, back, hideMenu, showMenu} = getGUILandingPage(advancedTexture)
     setBtnListeners(btnCenterBrain, btnLeftBrain, btnRightBrain, back, centerBrain, leftBrain, rightBrain, camera)
-  
     container.cameras.push(camera)
     container.lights.push(light)
     camera.setPosition(new BABYLON.Vector3(0,5,30))
     camera.setTarget(new BABYLON.Vector3(0,0,0))
-    let rootRendered = false
 
     scene.registerBeforeRender(function () {
       switch (root) {
         case 'right':
+          if(rootRendered) return
+          rootRendered = true
+          panelBorder.top = -200
+          hideMenu()
+          console.log(panel)
+          importDesk(scene).then(desk => {
+            console.log('desk',desk)
+            desk.forEach(mesh => {
+              container.meshes.push(mesh)
+            })
+          })
+          camera.setPosition(new BABYLON.Vector3(0,7.5,7.5))
+          camera.setTarget(new BABYLON.Vector3(0,5,0))
           break;
         case 'left':
+          if(rootRendered) return
+          panelBorder.top = -200
+          hideMenu()
+          rootRendered = true
+          importCreative(scene).then(creative => {
+            console.log('creative',creative)
+            creative.forEach(mesh => {
+              container.meshes.push(mesh)
+            })
+          })
+          camera.setPosition(new BABYLON.Vector3(0,7.5,7.5))
+          camera.setTarget(new BABYLON.Vector3(0,5,0))
           break;
         case 'center':
           if(rootRendered) return
+          panelBorder.top = -200
+          hideMenu()
           rootRendered = true
           importLightHouse(scene).then(paperHouse => {
-            console.log('paperHouse',paperHouse)
             paperHouse.forEach(mesh => {
               container.meshes.push(mesh)
             })
@@ -168,6 +198,8 @@ export const Create = (
       
         default:
           if(rootRendered){
+            panelBorder.top = 0
+            showMenu()
             camera.setPosition(new BABYLON.Vector3(0,5,30))
             camera.setTarget(new BABYLON.Vector3(0,0,0))
             console.log(container.meshes.length, 'mesh to remove')
@@ -176,6 +208,7 @@ export const Create = (
             });
             rootRendered = false
           }
+          container.meshes = []
           camera.alpha += .00075
           break;
       }

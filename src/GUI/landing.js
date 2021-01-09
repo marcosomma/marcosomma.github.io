@@ -80,10 +80,10 @@ export const getGUILandingPage = (advancedTexture) => {
     back.zIndex = 40
     back.color = "transparent";
     back.fontFamily = "Roboto";
-    back.fontWeight = 100
+    back.fontWeight = 400
     back.fontSize = 24
     back.heightInPixels = 30
-    back.paddingLeft = 180
+    back.paddingLeft = 0
     back.paddingRight = 0
     back.thickness = 0
 
@@ -113,10 +113,27 @@ export const getGUILandingPage = (advancedTexture) => {
     panel.addControl(contacts);
     panelBorder.addControl(panel);
 
+    const hideMenu = () => {
+        panelBorder.height = "232px"
+        panelBorder.width = "100px"
+        panel.height = "230px"
+        panel.width = "98px"
+    }
+
+    const showMenu = () => {
+        panelBorder.height = "282px"
+        panelBorder.width = "282px"
+        panel.height = "280px"
+        panel.width = "280px"
+    }
+
     return ({
+        panelBorder,
         btnCenterBrain,
         btnLeftBrain,
         btnRightBrain,
-        back
+        back,
+        hideMenu,
+        showMenu
     })
 }
