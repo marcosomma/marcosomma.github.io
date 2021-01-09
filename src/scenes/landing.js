@@ -5,8 +5,6 @@ import {
   importBrainPart,
   importLightHouse,
   importDesk,
-  importRobot,
-  importYashica,
   importCreative
 } from '../imports'
 import { getNewCamera, getNewLight } from '../common/helper'
