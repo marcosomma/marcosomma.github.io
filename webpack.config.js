@@ -12,7 +12,7 @@ module.exports = {
     lightHouse: __dirname + '/src/imports/lightHouse.js',
     brainGUI: __dirname + '/src/GUI/brain.js',
     landingGUI: __dirname + '/src/GUI/landing.js',
-    helper: __dirname + '/src/common/helper.js'
+    helper: __dirname + '/src/common/helper.js',
   },
   output: {
     filename: '[name].js',
@@ -48,6 +48,10 @@ module.exports = {
           from: __dirname + '/src/assets/css/',
           to: __dirname + '/dist/assets/css',
         },
+        {
+          from: __dirname + '/src/assets/images/',
+          to: __dirname + '/dist/assets/images',
+        },
       ],
     }),
     new webpack.EnvironmentPlugin({
@@ -74,13 +78,13 @@ module.exports = {
           },
         ],
       },
-      {    
+      {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        loader: "file-loader"
+        loader: 'file-loader',
       },
       {
         test: /\.(css)$/,
-        use: ["css-loader"]
+        use: ['css-loader'],
       },
       {
         test: /\.js$/,

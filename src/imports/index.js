@@ -3,9 +3,4 @@ import { importDesk } from './desk'
 import { importLightHouse } from './lightHouse'
 import { importCreative } from './creative'
 
-export { 
-    importBrainPart,
-    importDesk,
-    importLightHouse,
-    importCreative
-}
+export { importBrainPart, importDesk, importLightHouse, importCreative }
