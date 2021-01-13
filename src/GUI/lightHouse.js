@@ -16,8 +16,8 @@ const getLabelParams = (index) => {
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT
       break
     case 3:
-      params.h = '550px'
-      params.w = '600px'
+      params.h = '600px'
+      params.w = '500px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT
       break
@@ -63,8 +63,44 @@ const getTexts = (index) => {
       break
     case 3:
       text.header = 'Job experiences'
-      text.mainText =
-        "Responsible for control of the right side of the body, and is the more academic and logical side of the brain. \nIt's also controlling, Analytic thought, Logic, Language, Reasoning, Science and math, Written, Numbers skills and much more..."
+      text.jobs = [
+        {
+          title: 'Co-founder / Senior Software Developer',
+          company: 'Abzu.ai',
+          description:
+            'Abzu is realizing the promise of strong artificial intelligence. We are building a machine where cognition arises from self-organization of millions of cells.',
+        },
+        {
+          title: 'FullStack Developer',
+          company: 'Blackwood Seven',
+          description:
+            'Part of the Barcelona CORE Team, developing the core dashboard product and producing internal mangement tools.',
+        },
+        {
+          title: 'Senior BackEnd Developer',
+          company: 'ON - Opportunity Network',
+          description:
+            'Join at early stages of this start-up to enforce and scale the existing prototype-product to push it to the market',
+        },
+        {
+          title: 'BackEnd Developer',
+          company: 'Future Finance',
+          description:
+            'Join at early stages of this start-up to enforce and scale the existing prototype-product to push it to the market',
+        },
+        {
+          title: 'BackEnd Developer',
+          company: 'Skill Soft',
+          description:
+            'Moving actual E-learning products to Web 2.0, adapting AdobeFlash (ActionScript 2 and 3) contents to JS platform',
+        },
+        {
+          title: 'Consultant Developer',
+          company: 'Gec BCN / Tecfa / ANAYA / FANTA Italy and more...',
+          description:
+            'Developing e-learning contents, videogames, web applications and a lot of more multimedia products.',
+        },
+      ]
       break
     default:
       text.header = ''
@@ -112,28 +148,74 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
   advancedTexture.addControl(label)
 
   let texts = getTexts(index)
-  const header = getTextBox(
-    mesh.name + '_textBlock',
-    texts.header,
-    'black',
-    500,
-    14,
-    texts.headerMargins,
-    texts.headerAignment
-  )
-  const mainText = getTextBox(
-    mesh.name + '_textBlock',
-    texts.mainText,
-    'black',
-    100,
-    12,
-    texts.mainTextMargins,
-    texts.mainTextAignment
-  )
+  if (index === 3) {
+    const header = getTextBox(
+      mesh.name + '_JOB_textBlock',
+      'Jobs',
+      'black',
+      500,
+      16,
+      texts.headerMargins,
+      texts.headerAignment
+    )
+    label.addControl(header)
+    texts.jobs.forEach((job, i) => {
+      let top = 50 * (i + 1)
+      const title = getTextBox(
+        mesh.name + '_' + i + '_JOB_title_textBlock',
+        job.title,
+        'black',
+        500,
+        14,
+        { ...texts.mainTextMargins, t: texts.mainTextMargins.t * i + top },
+        texts.headerAignment
+      )
+      const company = getTextBox(
+        mesh.name + '_' + i + '_JOB_company_textBlock',
+        job.company,
+        'black',
+        400,
+        12,
+        { ...texts.mainTextMargins, t: texts.mainTextMargins.t * i + 25 + top },
+        texts.headerAignment
+      )
+      const description = getTextBox(
+        mesh.name + '_' + i + '_JOB_description_textBlock',
+        job.description,
+        'black',
+        100,
+        12,
+        { ...texts.mainTextMargins, t: texts.mainTextMargins.t * i + 40 + top },
+        texts.headerAignment
+      )
 
-  label.addControl(header)
-  label.addControl(mainText)
+      label.addControl(title)
+      label.addControl(company)
+      label.addControl(description)
+    })
+  } else {
+    const header = getTextBox(
+      mesh.name + '_textBlock',
+      texts.header,
+      'black',
+      500,
+      16,
+      texts.headerMargins,
+      texts.headerAignment
+    )
+    const mainText = getTextBox(
+      mesh.name + '_textBlock',
+      texts.mainText,
+      'black',
+      100,
+      12,
+      texts.mainTextMargins,
+      texts.mainTextAignment
+    )
 
+    label.addControl(header)
+    label.addControl(mainText)
+  }
   let line = new GUI.Line()
   line.lineWidth = 1
   line.color = 'black'
