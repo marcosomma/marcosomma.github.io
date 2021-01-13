@@ -1,11 +1,5 @@
 # marcosomma.github.io
 
-## DEV
+## Work in progress
 
-`docker-compose up`
-
-To force build:
-
-`docker-compose up --build --remove-orphans`
-
-Then go to [0.0.0.0:8080](http://0.0.0.0:8080/)
+Some cool 3D things is coming out soon! Stay tooned!
