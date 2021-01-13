@@ -147,6 +147,7 @@ export const Create = (
   report,
   space_size
 ) => {
+  console.log(GUI.AdvancedDynamicTexture)
   const camera = getNewCamera('mainCamera', scene, canvas, space_size)
   const light = getNewLight('mainLight', scene)
   const advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI(
@@ -191,7 +192,7 @@ export const Create = (
           rootRendered = true
           panelBorder.top = -200
           hideMenu()
-          pageTitle = getGUITitleDesk(scene)
+          pageTitle = getGUITitleDesk(scene, advancedTexture)
           importDesk(scene).then((desk) => {
             desk.forEach((mesh) => {
               container.meshes.push(mesh)

@@ -1,6 +1,6 @@
 version: '3'
 services:
-  marcosomma_web:
+  marcosomma_web-development:
     build:
       context: .
       dockerfile: Dockerfile.Dev
@@ -11,3 +11,4 @@ services:
     volumes:
       - /app/node_modules
       - .:/app
+    restart: always

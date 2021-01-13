@@ -11,7 +11,6 @@ const engine = new BABYLON.Engine(canvas, true)
 const renderScene = (json) => {
   const scene = Create(engine, json)
   try {
-    // Start render loop
     engine.runRenderLoop(() => {
       engine.beginFrame()
       scene.render()

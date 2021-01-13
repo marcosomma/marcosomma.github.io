@@ -6,29 +6,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 console.log(process.env.NODE_ENV)
 module.exports = {
   entry: {
-    main: __dirname + '/src/index.js',
-    // scene: __dirname + '/src/mainScene.js',
-    // deskActions: __dirname + '/src/actions/desk.js',
-    // indexActions: __dirname + '/src/actions/index.js',
-    // lightHouseActions: __dirname + '/src/actions/lightHouse.js',
-    // helper: __dirname + '/src/common/helper.js',
-    // brainGUI: __dirname + '/src/GUI/brain.js',
-    // deskGUI: __dirname + '/src/GUI/desk.js',
-    // indexGUI: __dirname + '/src/GUI/index.js',
-    // landingGUI: __dirname + '/src/GUI/landing.js',
-    // lightHouseGUI: __dirname + '/src/GUI/lightHouse.js',
-    // brainOBJ: __dirname + '/src/imports/brain.js',
-    // creativeOBJ: __dirname + '/src/imports/creative.js',
-    // deskOBJ: __dirname + '/src/imports/desk.js',
-    // indexOBJ: __dirname + '/src/imports/desk.js',
-    // lightHouseOBJ: __dirname + '/src/imports/lightHouse.js',
-    // landing: __dirname + '/src/scenes/landing.js',
+    mainDev: __dirname + '/src/index.js',
   },
   output: {
-    filename:
-      process.env.NODE_ENV === 'production'
-        ? '[name].[contenthash].js'
-        : '[name].js',
+    filename: '[name].js',
     path: __dirname + '/dist',
   },
   performance: {
@@ -41,7 +22,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: __dirname + '/src/index.html',
+          from: __dirname + '/src/index_dev.html',
         },
         {
           from: __dirname + '/src/favicon.ico',
@@ -60,11 +41,8 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      inject: process.env.NODE_ENV === 'production' ? true : false,
-      template:
-        __dirname + process.env.NODE_ENV === 'production'
-          ? '/dist/index.html'
-          : 'src/index_dev.html',
+      inject: false,
+      template: 'src/index_dev.html',
     }),
   ],
   resolve: {

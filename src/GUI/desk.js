@@ -233,7 +233,58 @@ export const getGUIDesk = (index, mesh, advancedTexture, scene) => {
   })
 }
 
-export const getGUITitleDesk = (scene) => {
+export const getGUITitleDesk = (scene, advancedTexture) => {
+  let label = new GUI.Rectangle('lightHOuse-title')
+  label.background = 'transparent'
+  label.height = '200px'
+  label.width = '400px'
+  label.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
+  label.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER
+  label.zIndex = 10
+  label.thickness = 0
+  advancedTexture.addControl(label)
+
+  const header = getTextBox(
+    'lightHOuse-title_textBlock',
+    'Senior Software Engineer',
+    'black',
+    500,
+    20,
+    { t: 10, l: 10, r: 10 },
+    {
+      v: GUI.Control.VERTICAL_ALIGNMENT_TOP,
+      h: GUI.Control.HORIZONTAL_ALIGNMENT_CENTER,
+    }
+  )
+  const mainText = getTextBox(
+    'lightHOuse-title_textBlock',
+    'A person who never made a mistake never tried anything new',
+    'black',
+    100,
+    14,
+    { t: 40, l: 10, r: 10 },
+    {
+      v: GUI.Control.VERTICAL_ALIGNMENT_TOP,
+      h: GUI.Control.HORIZONTAL_ALIGNMENT_LEFT,
+    }
+  )
+  const citText = getTextBox(
+    'lightHOuse-title_textBlock',
+    'Cit. Albert Einstaein',
+    'black',
+    400,
+    10,
+    { t: 65, l: 10, r: 20 },
+    {
+      v: GUI.Control.VERTICAL_ALIGNMENT_TOP,
+      h: GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT,
+    }
+  )
+
+  label.addControl(header)
+  label.addControl(mainText)
+  label.addControl(citText)
+
   var font_size = 20
   var font = font_size + 'px Roboto'
   var planeHeight = 0.5
@@ -334,5 +385,5 @@ export const getGUITitleDesk = (scene) => {
   planeMain.position.x = 0
   planeMain.position.y = 5.1
   planeMain.position.z = 6.2
-  return [planeFront, planeBack, planeMain]
+  return [planeFront, planeBack, planeMain, label]
 }
