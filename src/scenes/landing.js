@@ -234,16 +234,19 @@ export const Create = (
           break
 
         default:
+          if (container.meshes) {
+            console.log(container.meshes.length, 'mesh to remove')
+            container.meshes.forEach((element, index) => {
+              element.dispose()
+            })
+            container.meshes = []
+          }
           if (rootRendered) {
             panelBorder.top = 0
             showMenu()
             camera.setPosition(new BABYLON.Vector3(0, 5, 30))
             camera.setTarget(new BABYLON.Vector3(0, 0, 0))
-            console.log(container.meshes.length, 'mesh to remove')
-            if (container.meshes)
-              container.meshes.forEach((element, index) => {
-                element.dispose()
-              })
+
             if (pageTitle) {
               if (Array.isArray(pageTitle))
                 pageTitle.forEach((element) => element.dispose())
@@ -253,7 +256,6 @@ export const Create = (
             scene.fogMode = BABYLON.Scene.FOGMODE_EXP
             scene.fogColor = new BABYLON.Color3(0.9, 0.9, 0.8)
             scene.fogDensity = 0.01
-            container.meshes = []
             rootRendered = false
           }
           camera.alpha += 0.00075

@@ -4,19 +4,19 @@ const getLabelParams = (fileName) => {
   let params = {}
   switch (fileName) {
     case 'CX':
-      params.h = '200px'
+      params.h = '130px'
       params.w = '800px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER
       break
     case 'LX':
-      params.h = '250px'
+      params.h = '180px'
       params.w = '550px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT
       break
     case 'RX':
-      params.h = '280px'
+      params.h = '180px'
       params.w = '550px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT
@@ -58,30 +58,20 @@ const getTexts = (fileName) => {
       text.header = 'Amygdala, Hippocampus, Thalamus and Hypothalamus'
       text.mainText =
         'The amygdala is the emotion center of the brain, while the hippocampus plays an essential role in the formation of new memories about past experiences. The thalamus and hypothalamus are associated with changes in emotional reactivity.'
-      text.cit =
-        'Maecenas mollis eget nulla id tincidunt. Praesent semper iaculis ligula. '
-      text.citAuth = 'cit. I Lore'
       break
     case 'LX':
       text.header = 'Right Hemisphere:'
       text.mainText =
         "Responsible for control of the left side of the body, and is the more artistic and creative side of the brain. \nIt's also controlling, Art awareness, Creativity, Imgination, Insight, Holistic thought, Music awareness, 3-D forms and much more..."
-      text.cit =
-        'Logic will get you from A to B. Imagination will take you everywhere.'
-      text.citAuth = 'cit. A.Einstein'
       break
     case 'RX':
       text.header = 'Left Hemisphere:'
       text.mainText =
         "Responsible for control of the right side of the body, and is the more academic and logical side of the brain. \nIt's also controlling, Analytic thought, Logic, Language, Reasoning, Science and math, Written, Numbers skills and much more..."
-      text.cit = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-      text.citAuth = 'cit. L Ipsum'
       break
     default:
       text.header = ''
       text.mainText = ''
-      text.cit = ''
-      text.citAuth = ''
   }
   return text
 }
@@ -138,27 +128,9 @@ export const getGUIBrainPart = (
     texts.mainTextMargins,
     texts.mainTextAignment
   )
-  const cit = getTextBox(
-    texts.cit,
-    'black',
-    100,
-    10,
-    texts.citMargins,
-    texts.citAignment
-  )
-  const citAuth = getTextBox(
-    texts.citAuth,
-    'black',
-    500,
-    9,
-    texts.citAuthMargins,
-    texts.citAuthAignment
-  )
 
   label.addControl(header)
   label.addControl(mainText)
-  label.addControl(cit)
-  label.addControl(citAuth)
 
   let line = new GUI.Line()
   line.lineWidth = 1

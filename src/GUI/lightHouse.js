@@ -259,7 +259,7 @@ export const getGUITitleLightHouse = (advancedTexture) => {
   )
   const mainText = getTextBox(
     'lightHOuse-title_textBlock',
-    "I like to compare great leaders to a lighthouse. Steady whatever today's weather. Showing the way, in good and bad times. Seemingly useless when the sea is calm, absolutely vital when a hurricane hits. Not giving orders, but keeping everyone focused on the end goal.",
+    "I like to compare great leaders to a lighthouse. \nSteady whatever today's weather. Showing the way, in good and bad times. Seemingly useless when the sea is calm, absolutely vital when a hurricane hits. Not giving orders, but keeping everyone focused on the end goal.",
     'black',
     100,
     14,

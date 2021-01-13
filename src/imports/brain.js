@@ -32,7 +32,7 @@ const getAnimationParams = (fileName) => {
       })
       break
     default:
-      console.log(`No animation params for filename ${fileName}`)
+    // console.log(`No animation params for filename ${fileName}`)
   }
   return params
 }

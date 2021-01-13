@@ -1,21 +1,34 @@
-var CopyWebpackPlugin = require('copy-webpack-plugin')
-var webpack = require('webpack')
-var { SourceMapDevToolPlugin } = require('webpack')
-var nodeExternals = require('webpack-node-externals')
-
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const webpack = require('webpack')
+const { SourceMapDevToolPlugin } = require('webpack')
+const nodeExternals = require('webpack-node-externals')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+console.log(process.env.NODE_ENV)
 module.exports = {
   entry: {
     main: __dirname + '/src/index.js',
-    scene: __dirname + '/src/mainScene.js',
-    landing: __dirname + '/src/scenes/landing.js',
-    brain: __dirname + '/src/imports/brain.js',
-    lightHouse: __dirname + '/src/imports/lightHouse.js',
-    brainGUI: __dirname + '/src/GUI/brain.js',
-    landingGUI: __dirname + '/src/GUI/landing.js',
-    helper: __dirname + '/src/common/helper.js',
+    // scene: __dirname + '/src/mainScene.js',
+    // deskActions: __dirname + '/src/actions/desk.js',
+    // indexActions: __dirname + '/src/actions/index.js',
+    // lightHouseActions: __dirname + '/src/actions/lightHouse.js',
+    // helper: __dirname + '/src/common/helper.js',
+    // brainGUI: __dirname + '/src/GUI/brain.js',
+    // deskGUI: __dirname + '/src/GUI/desk.js',
+    // indexGUI: __dirname + '/src/GUI/index.js',
+    // landingGUI: __dirname + '/src/GUI/landing.js',
+    // lightHouseGUI: __dirname + '/src/GUI/lightHouse.js',
+    // brainOBJ: __dirname + '/src/imports/brain.js',
+    // creativeOBJ: __dirname + '/src/imports/creative.js',
+    // deskOBJ: __dirname + '/src/imports/desk.js',
+    // indexOBJ: __dirname + '/src/imports/desk.js',
+    // lightHouseOBJ: __dirname + '/src/imports/lightHouse.js',
+    // landing: __dirname + '/src/scenes/landing.js',
   },
   output: {
-    filename: '[name].js',
+    filename:
+      process.env.NODE_ENV === 'production'
+        ? '[name].[contenthash].js'
+        : '[name].js',
     path: __dirname + '/dist',
   },
   performance: {
@@ -37,40 +50,35 @@ module.exports = {
           from: __dirname + '/src/db.json',
         },
         {
-          from: __dirname + '/src/assets/fonts/',
-          to: __dirname + '/dist/assets/fonts',
-        },
-        {
-          from: __dirname + '/src/assets/models/',
-          to: __dirname + '/dist/assets/models',
-        },
-        {
-          from: __dirname + '/src/assets/css/',
-          to: __dirname + '/dist/assets/css',
-        },
-        {
-          from: __dirname + '/src/assets/images/',
-          to: __dirname + '/dist/assets/images',
+          from: __dirname + '/src/assets/',
+          to: __dirname + '/dist/assets',
         },
       ],
     }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: process.env.NODE_ENV,
     }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      inject: true,
+      template:
+        __dirname + process.env.NODE_ENV === 'production'
+          ? '/dist/index.html'
+          : 'src/index.html',
+    }),
   ],
   resolve: {
-    extensions: ['.js', '.ttf', '*'],
+    extensions: ['.js', '.ttf', '.obj', '.mtl', '.ico', '.tga', '.*', '*'],
   },
   devServer: {
     inline: true,
-    contentBase: __dirname + '/dist',
     port: 8080,
   },
   module: {
     rules: [
       {
         test: /\.test.js$/,
-        exclude: ['/node_modules/'],
+        exclude: ['/node_modules/', '/src/assets'],
         use: [
           {
             loader: 'babel-loader',
@@ -88,7 +96,16 @@ module.exports = {
       },
       {
         test: /\.js$/,
+        enforce: 'pre',
         use: ['source-map-loader'],
+      },
+      {
+        test: /\.obj$/,
+        loader: 'webpack-obj-loader',
+      },
+      {
+        test: /\.mtl$/,
+        loader: 'mtl-loader',
       },
     ],
   },
