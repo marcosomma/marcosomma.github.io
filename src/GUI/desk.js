@@ -234,7 +234,7 @@ export const getGUIDesk = (index, mesh, advancedTexture, scene) => {
 }
 
 export const getGUITitleDesk = (scene, advancedTexture) => {
-  let label = new GUI.Rectangle('lightHOuse-title')
+  let label = new GUI.Rectangle('Desk-title')
   label.background = 'transparent'
   label.height = '200px'
   label.width = '400px'
@@ -245,7 +245,7 @@ export const getGUITitleDesk = (scene, advancedTexture) => {
   advancedTexture.addControl(label)
 
   const header = getTextBox(
-    'lightHOuse-title_textBlock',
+    'Desk-title_textBlock',
     'Senior Software Engineer',
     'black',
     500,
@@ -257,7 +257,7 @@ export const getGUITitleDesk = (scene, advancedTexture) => {
     }
   )
   const mainText = getTextBox(
-    'lightHOuse-title_textBlock',
+    'Desk-title_textBlock',
     'A person who never made a mistake never tried anything new',
     'black',
     100,
@@ -269,7 +269,7 @@ export const getGUITitleDesk = (scene, advancedTexture) => {
     }
   )
   const citText = getTextBox(
-    'lightHOuse-title_textBlock',
+    'Desk-title_textBlock',
     'Cit. Albert Einstaein',
     'black',
     400,
