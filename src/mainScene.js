@@ -12,10 +12,7 @@ export const Create = (engine, report) => {
 
   scene.registerBeforeRender(function () {
     scene.disablePhysicsEngine()
-    scene.enablePhysics(
-      new BABYLON.Vector3(0, 0, 0),
-      new BABYLON.CannonJSPlugin()
-    )
+    scene.enablePhysics(new BABYLON.Vector3(0, 0, 0), new BABYLON.CannonJSPlugin())
   })
 
   return scene

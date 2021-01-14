@@ -1,23 +1,9 @@
 import * as BABYLON from 'babylonjs'
 import * as GUI from 'babylonjs-gui'
-import {
-  getGUILandingPage,
-  getGUITitleDesk,
-  getGUITitleLightHouse,
-} from '../GUI'
-import { setInteractiveLayerLightHouse } from '../actions'
-import {
-  importBrainPart,
-  importLightHouse,
-  importDesk,
-  importCreative,
-} from '../imports'
-import {
-  getNewCamera,
-  getNewLight,
-  setOutBrainAnimation,
-  setCameraAnimation,
-} from '../common/helper'
+import { getGUILandingPage, getGUITitleDesk, getGUITitleLightHouse } from '../GUI'
+import { setInteractiveLayerLightHouse, setInteractiveLayerDesk } from '../actions'
+import { importBrainPart, importLightHouse, importDesk, importCreative } from '../imports'
+import { getNewCamera, getNewLight, setOutBrainAnimation, setCameraAnimation } from '../common/helper'
 // BABYLON.Logger.LogLevels = 3
 
 let selected = undefined
@@ -52,6 +38,7 @@ const setBtnListeners = (
   })
   btnCenterBrain.onPointerClickObservable.add(() => {
     if (selected) return
+    selected = btnCenterBrain
     setOutBrainAnimation(
       camera,
       centerBrain,
@@ -64,7 +51,6 @@ const setBtnListeners = (
     )
     scene.beginAnimation(camera, 0, 60, false, 1, () => {
       root = 'center'
-      selected = btnCenterBrain
       btnCenterBrain.color = '#018786'
       centerBrain.material.alpha = 0
       btnCenterBrain.isPickable = false
@@ -88,6 +74,7 @@ const setBtnListeners = (
   })
   btnLeftBrain.onPointerClickObservable.add(() => {
     if (selected) return
+    selected = btnLeftBrain
     setOutBrainAnimation(
       camera,
       rightBrain,
@@ -100,7 +87,6 @@ const setBtnListeners = (
     )
     scene.beginAnimation(camera, 0, 60, false, 1, () => {
       root = 'left'
-      selected = btnLeftBrain
       btnLeftBrain.color = '#018786'
       rightBrain.material.alpha = 0
       btnLeftBrain.isPickable = false
@@ -124,6 +110,7 @@ const setBtnListeners = (
   })
   btnRightBrain.onPointerClickObservable.add(() => {
     if (selected) return
+    selected = btnRightBrain
     setOutBrainAnimation(
       camera,
       leftBrain,
@@ -136,7 +123,6 @@ const setBtnListeners = (
     )
     scene.beginAnimation(camera, 0, 60, false, 1, () => {
       root = 'right'
-      selected = btnRightBrain
       btnRightBrain.color = '#018786'
       leftBrain.material.alpha = 0
       btnRightBrain.isPickable = false
@@ -145,11 +131,7 @@ const setBtnListeners = (
   })
   back.onPointerClickObservable.add(() => {
     if (!selected) return
-    setCameraAnimation(
-      camera,
-      new BABYLON.Vector3(0, 50, 30),
-      new BABYLON.Vector3(0, 50, 0)
-    )
+    setCameraAnimation(camera, new BABYLON.Vector3(0, 50, 30), new BABYLON.Vector3(0, 50, 0))
     scene.beginAnimation(camera, 0, 60, false, 1, () => {
       root = ''
       btnCenterBrain.color = 'black'
@@ -167,20 +149,11 @@ const setBtnListeners = (
   })
 }
 
-export const Create = (
-  engine,
-  scene,
-  canvas,
-  container,
-  report,
-  space_size
-) => {
+export const Create = (engine, scene, canvas, container, report, space_size) => {
   console.log(GUI.AdvancedDynamicTexture)
   const camera = getNewCamera('mainCamera', scene, canvas, space_size)
   const light = getNewLight('mainLight', scene)
-  const advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI(
-    'LandingUi'
-  )
+  const advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('LandingUi')
 
   camera.actionManager = new BABYLON.ActionManager(scene)
 
@@ -222,18 +195,16 @@ export const Create = (
           if (rootRendered) return
           rootRendered = true
           hideMenu()
+          setInteractiveLayerDesk(container, advancedTexture, scene, camera)
           pageTitle = getGUITitleDesk(scene, advancedTexture)
           importDesk(scene).then((desk) => {
             desk.forEach((mesh) => {
               container.meshes.push(mesh)
             })
           })
-          setCameraAnimation(
-            camera,
-            new BABYLON.Vector3(0, 7.5, 30),
-            new BABYLON.Vector3(0, 5, 0)
-          )
+          setCameraAnimation(camera, new BABYLON.Vector3(0, 7.5, 30), new BABYLON.Vector3(0, 5, 0))
           scene.beginAnimation(camera, 0, 60, false)
+          scene.fogDensity = 0.001
           break
         case 'left':
           if (rootRendered) return
@@ -244,11 +215,7 @@ export const Create = (
               container.meshes.push(mesh)
             })
           })
-          setCameraAnimation(
-            camera,
-            new BABYLON.Vector3(0, 7.5, 30),
-            new BABYLON.Vector3(0, 5, 0)
-          )
+          setCameraAnimation(camera, new BABYLON.Vector3(0, 7.5, 30), new BABYLON.Vector3(0, 5, 0))
           scene.beginAnimation(camera, 0, 60, false)
           break
         case 'center':
@@ -262,11 +229,7 @@ export const Create = (
               container.meshes.push(mesh)
             })
           })
-          setCameraAnimation(
-            camera,
-            new BABYLON.Vector3(0, 7.5, 30),
-            new BABYLON.Vector3(0, 5, 0)
-          )
+          setCameraAnimation(camera, new BABYLON.Vector3(0, 7.5, 30), new BABYLON.Vector3(0, 5, 0))
           scene.beginAnimation(camera, 0, 60, false)
           scene.ambientColor = new BABYLON.Color3(1, 1, 1)
           scene.fogMode = BABYLON.Scene.FOGMODE_EXP
@@ -283,16 +246,11 @@ export const Create = (
             container.meshes = []
           }
           if (rootRendered) {
-            setCameraAnimation(
-              camera,
-              new BABYLON.Vector3(0, 7.5, 30),
-              new BABYLON.Vector3(0, 5, 0)
-            )
+            setCameraAnimation(camera, new BABYLON.Vector3(0, 7.5, 30), new BABYLON.Vector3(0, 5, 0))
             scene.beginAnimation(camera, 0, 60, false)
             showMenu()
             if (pageTitle) {
-              if (Array.isArray(pageTitle))
-                pageTitle.forEach((element) => element.dispose())
+              if (Array.isArray(pageTitle)) pageTitle.forEach((element) => element.dispose())
               else pageTitle.dispose()
             }
             scene.ambientColor = new BABYLON.Color3(0.25, 0.25, 0.25)

@@ -1,11 +1,5 @@
 import * as GUI from 'babylonjs-gui'
-import {
-  FONT_SIZE,
-  NORMAL_FONT,
-  THINY_FONT,
-  TITLE_FONT_SIZE,
-  SUB_TITLE_FONT_SIZE,
-} from './common'
+import { FONT_SIZE, NORMAL_FONT, THINY_FONT, TITLE_FONT_SIZE, SUB_TITLE_FONT_SIZE } from './common'
 
 export const getGUILandingPage = (advancedTexture) => {
   let panelBorder = new GUI.StackPanel('borderMainStackPanel')
@@ -50,10 +44,7 @@ export const getGUILandingPage = (advancedTexture) => {
   header.textHorizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT
   header.paddingLeft = 10
 
-  let btnCenterBrain = new GUI.Button.CreateSimpleButton(
-    'menu-Experiences',
-    'Experiences'
-  )
+  let btnCenterBrain = new GUI.Button.CreateSimpleButton('menu-Experiences', 'Experiences')
   btnCenterBrain.zIndex = 40
   btnCenterBrain.color = 'black'
   btnCenterBrain.fontFamily = 'Roboto'
@@ -65,10 +56,7 @@ export const getGUILandingPage = (advancedTexture) => {
   btnCenterBrain.paddingRight = 0
   btnCenterBrain.thickness = 0
 
-  let btnRightBrain = new GUI.Button.CreateSimpleButton(
-    'menu-Programming',
-    'Programming'
-  )
+  let btnRightBrain = new GUI.Button.CreateSimpleButton('menu-Programming', 'Programming')
   btnRightBrain.zIndex = 40
   btnRightBrain.color = 'black'
   btnRightBrain.fontFamily = 'Roboto'
@@ -79,10 +67,7 @@ export const getGUILandingPage = (advancedTexture) => {
   btnRightBrain.paddingRight = 0
   btnRightBrain.thickness = 0
 
-  let btnLeftBrain = new GUI.Button.CreateSimpleButton(
-    'menu-Creativity',
-    'Creativity'
-  )
+  let btnLeftBrain = new GUI.Button.CreateSimpleButton('menu-Creativity', 'Creativity')
   btnLeftBrain.zIndex = 40
   btnLeftBrain.color = 'black'
   btnLeftBrain.fontFamily = 'Roboto'
@@ -104,10 +89,7 @@ export const getGUILandingPage = (advancedTexture) => {
   back.paddingRight = 0
   back.thickness = 0
 
-  let contacts = new GUI.TextBlock(
-    'marcosomma.work@gmail.com',
-    'marcosomma.work@gmail.com'
-  )
+  let contacts = new GUI.TextBlock('marcosomma.work@gmail.com', 'marcosomma.work@gmail.com')
   contacts.zIndex = 43
   contacts.color = 'black'
   contacts.fontFamily = 'Roboto'

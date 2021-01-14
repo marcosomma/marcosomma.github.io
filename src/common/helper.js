@@ -12,15 +12,7 @@ export const getNewScene = (engine) => {
 }
 
 export const getNewCamera = (id, scene, canvas, space_size) => {
-  let camera = new BABYLON.ArcRotateCamera(
-    id,
-    1,
-    1,
-    space_size * 10,
-    new BABYLON.Vector3(0, 5, 0),
-    scene,
-    true
-  )
+  let camera = new BABYLON.ArcRotateCamera(id, 1, 1, space_size * 10, new BABYLON.Vector3(0, 5, 0), scene, true)
   camera.attachControl(canvas, false, false, 1)
   camera.collisionRadius = new BABYLON.Vector3(10, 10, 10)
   camera.lowerRadiusLimit = 20
@@ -32,11 +24,7 @@ export const getNewCamera = (id, scene, canvas, space_size) => {
 }
 
 export const getNewLight = (id, scene) => {
-  var light = new BABYLON.HemisphericLight(
-    'hemiLight',
-    new BABYLON.Vector3(0, 1, 0),
-    scene
-  )
+  var light = new BABYLON.HemisphericLight('hemiLight', new BABYLON.Vector3(0, 1, 0), scene)
   light.diffuse = new BABYLON.Color3(255, 255, 255)
   light.specular = new BABYLON.Color3(255, 255, 255)
   // light.groundColor = new BABYLON.Color3(255,255,255);
@@ -55,6 +43,13 @@ export const setOutBrainAnimation = (
   endTarget,
   endPosition
 ) => {
+  btnToHide1.isPickable = false
+  btnToHide2.isPickable = false
+  btnToHide1.color = '#c2c2c2'
+  btnToHide2.color = '#c2c2c2'
+  selectedBrainPart.setAlpha(0)
+  objToHide1.material.alpha = 0
+  objToHide2.material.alpha = 0
   let animationPos = new BABYLON.Animation(
     `desk-enter-animationPos`,
     'position',
@@ -71,22 +66,15 @@ export const setOutBrainAnimation = (
   )
   animationTarget.setKeys([
     { frame: 0, value: camera.target.clone() },
-    { frame: 30, value: endTarget },
+    { frame: 15, value: endTarget },
   ])
   animationPos.setKeys([
     { frame: 0, value: camera.position.clone() },
-    { frame: 30, value: endPosition },
+    { frame: 15, value: endPosition },
   ])
   camera.animations = []
   camera.animations.push(animationTarget)
   camera.animations.push(animationPos)
-  selectedBrainPart.setAlpha(0)
-  objToHide1.material.alpha = 0
-  objToHide2.material.alpha = 0
-  btnToHide1.color = '#c2c2c2'
-  btnToHide1.isPickable = false
-  btnToHide2.color = '#c2c2c2'
-  btnToHide2.isPickable = false
 }
 
 export const setCameraAnimation = (camera, endPosition, endTarget) => {

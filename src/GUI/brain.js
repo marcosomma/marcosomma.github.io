@@ -105,11 +105,7 @@ const getTextBox = (text, color, fontWeight, fontSize, margins, alignment) => {
   return textBox
 }
 
-export const getGUIBrainPart = (
-  fileName,
-  importedBrainPart,
-  advancedTexture
-) => {
+export const getGUIBrainPart = (fileName, importedBrainPart, advancedTexture) => {
   let label = new GUI.Rectangle('label for ' + importedBrainPart.name)
   let labelParams = getLabelParams(fileName)
   label.background = '#f1f1f1'

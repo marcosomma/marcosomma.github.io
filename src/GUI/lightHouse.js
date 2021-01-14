@@ -74,7 +74,7 @@ const getTexts = (index) => {
       text.header = 'Job experiences'
       text.jobs = [
         {
-          title: 'Co-founder / Senior Software Developer',
+          title: 'Co-founder / Senior FullStack Developer',
           company: 'Abzu.ai',
           description:
             'Abzu is realizing the promise of strong artificial intelligence. We are building a machine where cognition arises from self-organization of millions of cells.',
@@ -118,15 +118,7 @@ const getTexts = (index) => {
   return text
 }
 
-const getTextBox = (
-  id,
-  text,
-  color,
-  fontWeight,
-  fontSize,
-  margins,
-  alignment
-) => {
+const getTextBox = (id, text, color, fontWeight, fontSize, margins, alignment) => {
   let textBox = new GUI.TextBlock(id)
   textBox.textWrapping = GUI.TextWrapping.WordWrap
   textBox.fontFamily = 'Roboto'
@@ -246,76 +238,28 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
   mesh.isPickable = true
   mesh.actionManager = new BABYLON.ActionManager(scene)
   mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(
-      BABYLON.ActionManager.OnPointerOverTrigger,
-      endRound,
-      'alpha',
-      1,
-      100
-    )
+    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, endRound, 'alpha', 1, 100)
   )
   mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(
-      BABYLON.ActionManager.OnPointerOverTrigger,
-      endRound,
-      'thickness',
-      2,
-      100
-    )
+    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, endRound, 'thickness', 2, 100)
   )
   mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(
-      BABYLON.ActionManager.OnPointerOverTrigger,
-      label,
-      'alpha',
-      1,
-      100
-    )
+    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, label, 'alpha', 1, 100)
   )
   mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(
-      BABYLON.ActionManager.OnPointerOverTrigger,
-      line,
-      'alpha',
-      1,
-      100
-    )
+    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, line, 'alpha', 1, 100)
   )
   mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(
-      BABYLON.ActionManager.OnPointerOutTrigger,
-      endRound,
-      'alpha',
-      0.5,
-      100
-    )
+    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOutTrigger, endRound, 'alpha', 0.5, 100)
   )
   mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(
-      BABYLON.ActionManager.OnPointerOutTrigger,
-      endRound,
-      'thickness',
-      1,
-      100
-    )
+    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOutTrigger, endRound, 'thickness', 1, 100)
   )
   mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(
-      BABYLON.ActionManager.OnPointerOutTrigger,
-      label,
-      'alpha',
-      0,
-      100
-    )
+    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOutTrigger, label, 'alpha', 0, 100)
   )
   mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(
-      BABYLON.ActionManager.OnPointerOutTrigger,
-      line,
-      'alpha',
-      0,
-      100
-    )
+    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOutTrigger, line, 'alpha', 0, 100)
   )
   mesh.onDisposeObservable.add(() => {
     endRound.dispose()
@@ -338,7 +282,7 @@ export const getGUITitleLightHouse = (advancedTexture) => {
 
   const header = getTextBox(
     'lightHOuse-title_textBlock',
-    'CoFounder - Team Lead - Senior Software Engineer - Ethologist',
+    'CoFounder - Team Lead - Senior FullStack Developer - Ethologist',
     'black',
     BOLD_FONT,
     SUB_TITLE_FONT_SIZE,

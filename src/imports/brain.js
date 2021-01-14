@@ -38,40 +38,31 @@ const getAnimationParams = (fileName) => {
 }
 export const importBrainPart = (fileName, scene, advancedTexture) =>
   new Promise((resolve, reject) => {
-    BABYLON.SceneLoader.LoadAssetContainer(
-      '/assets/models/',
-      `${fileName}.obj`,
-      scene,
-      (assets) => {
-        assets.addAllToScene()
-        let importedBrainPart = assets.meshes[0]
-        importedBrainPart.scaling = SCALE
+    BABYLON.SceneLoader.LoadAssetContainer('/assets/models/', `${fileName}.obj`, scene, (assets) => {
+      assets.addAllToScene()
+      let importedBrainPart = assets.meshes[0]
+      importedBrainPart.scaling = SCALE
 
-        let animationParams = getAnimationParams(fileName)
-        let animation = new BABYLON.Animation(
-          `${fileName}-animation`,
-          animationParams.type,
-          50,
-          BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-          BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
-        )
-        animation.setKeys(animationParams.keys)
-        importedBrainPart.animations.push(animation)
-        scene.beginAnimation(importedBrainPart, 0, 50, false)
+      let animationParams = getAnimationParams(fileName)
+      let animation = new BABYLON.Animation(
+        `${fileName}-animation`,
+        animationParams.type,
+        50,
+        BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+        BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+      )
+      animation.setKeys(animationParams.keys)
+      importedBrainPart.animations.push(animation)
+      scene.beginAnimation(importedBrainPart, 0, 50, false)
 
-        const gUi = getGUIBrainPart(
-          fileName,
-          importedBrainPart,
-          advancedTexture
-        )
-        importedBrainPart.setAlpha = (value) => {
-          gUi.label.alpha = value
-          gUi.line.alpha = value
-          gUi.endRound.alpha = value
-        }
-
-        importedBrainPart.setAlpha(0)
-        resolve(importedBrainPart)
+      const gUi = getGUIBrainPart(fileName, importedBrainPart, advancedTexture)
+      importedBrainPart.setAlpha = (value) => {
+        gUi.label.alpha = value
+        gUi.line.alpha = value
+        gUi.endRound.alpha = value
       }
-    )
+
+      importedBrainPart.setAlpha(0)
+      resolve(importedBrainPart)
+    })
   })

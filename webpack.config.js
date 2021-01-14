@@ -25,10 +25,7 @@ module.exports = {
     // landing: __dirname + '/src/scenes/landing.js',
   },
   output: {
-    filename:
-      process.env.NODE_ENV === 'production'
-        ? '[name].[contenthash].js'
-        : '[name].js',
+    filename: process.env.NODE_ENV === 'production' ? '[name].[contenthash].js' : '[name].js',
     path: __dirname + '/dist',
   },
   performance: {
@@ -61,10 +58,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: process.env.NODE_ENV === 'production' ? true : false,
-      template:
-        __dirname + process.env.NODE_ENV === 'production'
-          ? '/dist/index.html'
-          : 'src/index_dev.html',
+      template: __dirname + process.env.NODE_ENV === 'production' ? '/dist/index.html' : 'src/index_dev.html',
     }),
   ],
   resolve: {
