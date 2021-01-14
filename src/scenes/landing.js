@@ -12,7 +12,12 @@ import {
   importDesk,
   importCreative,
 } from '../imports'
-import { getNewCamera, getNewLight } from '../common/helper'
+import {
+  getNewCamera,
+  getNewLight,
+  setOutBrainAnimation,
+  setCameraAnimation,
+} from '../common/helper'
 // BABYLON.Logger.LogLevels = 3
 
 let selected = undefined
@@ -28,7 +33,8 @@ const setBtnListeners = (
   centerBrain,
   leftBrain,
   rightBrain,
-  camera
+  camera,
+  scene
 ) => {
   btnCenterBrain.onPointerEnterObservable.add(() => {
     if (selected) return
@@ -46,19 +52,24 @@ const setBtnListeners = (
   })
   btnCenterBrain.onPointerClickObservable.add(() => {
     if (selected) return
-    root = 'center'
-    selected = btnCenterBrain
-    btnCenterBrain.color = '#018786'
-    centerBrain.setAlpha(0)
-    centerBrain.material.alpha = 0
-    leftBrain.material.alpha = 0
-    rightBrain.material.alpha = 0
-    btnLeftBrain.color = '#c2c2c2'
-    btnRightBrain.color = '#c2c2c2'
-    btnCenterBrain.isPickable = false
-    btnRightBrain.isPickable = false
-    btnLeftBrain.isPickable = false
-    back.color = 'black'
+    setOutBrainAnimation(
+      camera,
+      centerBrain,
+      leftBrain,
+      rightBrain,
+      btnRightBrain,
+      btnLeftBrain,
+      new BABYLON.Vector3(0, 50, 0),
+      new BABYLON.Vector3(0, 50, 30)
+    )
+    scene.beginAnimation(camera, 0, 60, false, 1, () => {
+      root = 'center'
+      selected = btnCenterBrain
+      btnCenterBrain.color = '#018786'
+      centerBrain.material.alpha = 0
+      btnCenterBrain.isPickable = false
+      back.color = 'black'
+    })
   })
 
   btnLeftBrain.onPointerEnterObservable.add(() => {
@@ -77,19 +88,24 @@ const setBtnListeners = (
   })
   btnLeftBrain.onPointerClickObservable.add(() => {
     if (selected) return
-    root = 'left'
-    selected = btnLeftBrain
-    btnLeftBrain.color = '#018786'
-    rightBrain.setAlpha(0)
-    centerBrain.material.alpha = 0
-    leftBrain.material.alpha = 0
-    rightBrain.material.alpha = 0
-    btnCenterBrain.color = '#c2c2c2'
-    btnRightBrain.color = '#c2c2c2'
-    btnCenterBrain.isPickable = false
-    btnRightBrain.isPickable = false
-    btnLeftBrain.isPickable = false
-    back.color = 'black'
+    setOutBrainAnimation(
+      camera,
+      rightBrain,
+      leftBrain,
+      centerBrain,
+      btnRightBrain,
+      btnCenterBrain,
+      new BABYLON.Vector3(-50, 5, 0),
+      new BABYLON.Vector3(-50, 7.5, 30)
+    )
+    scene.beginAnimation(camera, 0, 60, false, 1, () => {
+      root = 'left'
+      selected = btnLeftBrain
+      btnLeftBrain.color = '#018786'
+      rightBrain.material.alpha = 0
+      btnLeftBrain.isPickable = false
+      back.color = 'black'
+    })
   })
 
   btnRightBrain.onPointerEnterObservable.add(() => {
@@ -108,34 +124,46 @@ const setBtnListeners = (
   })
   btnRightBrain.onPointerClickObservable.add(() => {
     if (selected) return
-    root = 'right'
-    selected = btnRightBrain
-    btnRightBrain.color = '#018786'
-    leftBrain.setAlpha(0)
-    centerBrain.material.alpha = 0
-    leftBrain.material.alpha = 0
-    rightBrain.material.alpha = 0
-    btnCenterBrain.color = '#c2c2c2'
-    btnLeftBrain.color = '#c2c2c2'
-    btnCenterBrain.isPickable = false
-    btnRightBrain.isPickable = false
-    btnLeftBrain.isPickable = false
-    back.color = 'black'
+    setOutBrainAnimation(
+      camera,
+      leftBrain,
+      rightBrain,
+      centerBrain,
+      btnLeftBrain,
+      btnCenterBrain,
+      new BABYLON.Vector3(50, 5, 0),
+      new BABYLON.Vector3(50, 7.5, 30)
+    )
+    scene.beginAnimation(camera, 0, 60, false, 1, () => {
+      root = 'right'
+      selected = btnRightBrain
+      btnRightBrain.color = '#018786'
+      leftBrain.material.alpha = 0
+      btnRightBrain.isPickable = false
+      back.color = 'black'
+    })
   })
   back.onPointerClickObservable.add(() => {
     if (!selected) return
-    root = ''
-    btnCenterBrain.color = 'black'
-    btnRightBrain.color = 'black'
-    btnLeftBrain.color = 'black'
-    centerBrain.material.alpha = 1
-    leftBrain.material.alpha = 1
-    rightBrain.material.alpha = 1
-    btnCenterBrain.isPickable = true
-    btnRightBrain.isPickable = true
-    btnLeftBrain.isPickable = true
-    selected = undefined
-    back.color = 'transparent'
+    setCameraAnimation(
+      camera,
+      new BABYLON.Vector3(0, 50, 30),
+      new BABYLON.Vector3(0, 50, 0)
+    )
+    scene.beginAnimation(camera, 0, 60, false, 1, () => {
+      root = ''
+      btnCenterBrain.color = 'black'
+      btnRightBrain.color = 'black'
+      btnLeftBrain.color = 'black'
+      centerBrain.material.alpha = 1
+      leftBrain.material.alpha = 1
+      rightBrain.material.alpha = 1
+      btnCenterBrain.isPickable = true
+      btnRightBrain.isPickable = true
+      btnLeftBrain.isPickable = true
+      selected = undefined
+      back.color = 'transparent'
+    })
   })
 }
 
@@ -153,6 +181,8 @@ export const Create = (
   const advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI(
     'LandingUi'
   )
+
+  camera.actionManager = new BABYLON.ActionManager(scene)
 
   Promise.all([
     importBrainPart('CX', scene, advancedTexture),
@@ -178,19 +208,19 @@ export const Create = (
       centerBrain,
       leftBrain,
       rightBrain,
-      camera
+      camera,
+      scene
     )
     container.cameras.push(camera)
     container.lights.push(light)
-    camera.setPosition(new BABYLON.Vector3(0, 5, 30))
-    camera.setTarget(new BABYLON.Vector3(0, 0, 0))
+    camera.setPosition(new BABYLON.Vector3(0, 7.5, 30))
+    camera.setTarget(new BABYLON.Vector3(0, 5, 0))
 
     scene.registerBeforeRender(function () {
       switch (root) {
         case 'right':
           if (rootRendered) return
           rootRendered = true
-          panelBorder.top = -200
           hideMenu()
           pageTitle = getGUITitleDesk(scene, advancedTexture)
           importDesk(scene).then((desk) => {
@@ -198,12 +228,15 @@ export const Create = (
               container.meshes.push(mesh)
             })
           })
-          camera.setPosition(new BABYLON.Vector3(0, 7.5, 7.5))
-          camera.setTarget(new BABYLON.Vector3(0, 5, 0))
+          setCameraAnimation(
+            camera,
+            new BABYLON.Vector3(0, 7.5, 30),
+            new BABYLON.Vector3(0, 5, 0)
+          )
+          scene.beginAnimation(camera, 0, 60, false)
           break
         case 'left':
           if (rootRendered) return
-          panelBorder.top = -200
           rootRendered = true
           hideMenu()
           importCreative(scene).then((creative) => {
@@ -211,12 +244,15 @@ export const Create = (
               container.meshes.push(mesh)
             })
           })
-          camera.setPosition(new BABYLON.Vector3(0, 7.5, 7.5))
-          camera.setTarget(new BABYLON.Vector3(0, 5, 0))
+          setCameraAnimation(
+            camera,
+            new BABYLON.Vector3(0, 7.5, 30),
+            new BABYLON.Vector3(0, 5, 0)
+          )
+          scene.beginAnimation(camera, 0, 60, false)
           break
         case 'center':
           if (rootRendered) return
-          panelBorder.top = -200
           rootRendered = true
           hideMenu()
           setInteractiveLayerLightHouse(container, advancedTexture, scene)
@@ -226,8 +262,12 @@ export const Create = (
               container.meshes.push(mesh)
             })
           })
-          camera.setPosition(new BABYLON.Vector3(0, 7.5, 7.5))
-          camera.setTarget(new BABYLON.Vector3(0, 5, 0))
+          setCameraAnimation(
+            camera,
+            new BABYLON.Vector3(0, 7.5, 30),
+            new BABYLON.Vector3(0, 5, 0)
+          )
+          scene.beginAnimation(camera, 0, 60, false)
           scene.ambientColor = new BABYLON.Color3(1, 1, 1)
           scene.fogMode = BABYLON.Scene.FOGMODE_EXP
           scene.fogColor = new BABYLON.Color3(0.5, 0.9, 0.8)
@@ -243,11 +283,13 @@ export const Create = (
             container.meshes = []
           }
           if (rootRendered) {
-            panelBorder.top = 0
+            setCameraAnimation(
+              camera,
+              new BABYLON.Vector3(0, 7.5, 30),
+              new BABYLON.Vector3(0, 5, 0)
+            )
+            scene.beginAnimation(camera, 0, 60, false)
             showMenu()
-            camera.setPosition(new BABYLON.Vector3(0, 5, 30))
-            camera.setTarget(new BABYLON.Vector3(0, 0, 0))
-
             if (pageTitle) {
               if (Array.isArray(pageTitle))
                 pageTitle.forEach((element) => element.dispose())
@@ -262,6 +304,7 @@ export const Create = (
           camera.alpha += 0.00075
           break
       }
+      light.position = camera.position
     })
     scene.ambientColor = new BABYLON.Color3(0.25, 0.25, 0.25)
     scene.fogMode = BABYLON.Scene.FOGMODE_EXP

@@ -1,25 +1,37 @@
 import * as GUI from 'babylonjs-gui'
+import {
+  HEADER_FONT_SIZE,
+  SUB_HEADER_FONT_SIZE,
+  FONT_SIZE,
+  BOLD_FONT,
+  NORMAL_FONT,
+  THINY_FONT,
+  TITLE_FONT_SIZE,
+  SUB_TITLE_FONT_SIZE,
+} from './common'
 
 const getLabelParams = (fileName) => {
   let params = {}
   switch (fileName) {
     case 'CX':
-      params.h = '130px'
-      params.w = '800px'
+      params.h = '110px'
+      params.w = '550px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER
       break
     case 'LX':
       params.h = '180px'
-      params.w = '550px'
+      params.w = '420px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT
+      params.paddingRight = 150
       break
     case 'RX':
       params.h = '180px'
-      params.w = '550px'
+      params.w = '420px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT
+      params.paddingLeft = 150
       break
     default:
       params.h = '350px'
@@ -37,7 +49,7 @@ const getTexts = (fileName) => {
       v: GUI.Control.VERTICAL_ALIGNMENT_TOP,
       h: GUI.Control.HORIZONTAL_ALIGNMENT_LEFT,
     },
-    mainTextMargins: { t: 30, l: 5 },
+    mainTextMargins: { t: 30, l: 5, r: 5 },
     mainTextAignment: {
       v: GUI.Control.VERTICAL_ALIGNMENT_TOP,
       h: GUI.Control.HORIZONTAL_ALIGNMENT_LEFT,
@@ -107,24 +119,24 @@ export const getGUIBrainPart = (
   label.horizontalAlignment = labelParams.horizontalAlignment
   label.zIndex = 1
   label.top = 80
-  label.paddingRight = 150
-  label.paddingLeft = 150
+  if (labelParams.paddingRight) label.paddingRight = labelParams.paddingRight
+  if (labelParams.paddingLeft) label.paddingLeft = labelParams.paddingLeft
   advancedTexture.addControl(label)
 
   let texts = getTexts(fileName)
   const header = getTextBox(
     texts.header,
     'black',
-    500,
-    14,
+    BOLD_FONT,
+    SUB_HEADER_FONT_SIZE,
     texts.headerMargins,
     texts.headerAignment
   )
   const mainText = getTextBox(
     texts.mainText,
     'black',
-    100,
-    12,
+    THINY_FONT,
+    FONT_SIZE,
     texts.mainTextMargins,
     texts.mainTextAignment
   )

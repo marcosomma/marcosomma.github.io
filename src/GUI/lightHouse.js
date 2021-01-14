@@ -1,4 +1,13 @@
 import * as GUI from 'babylonjs-gui'
+import {
+  HEADER_FONT_SIZE,
+  SUB_HEADER_FONT_SIZE,
+  FONT_SIZE,
+  BOLD_FONT,
+  NORMAL_FONT,
+  THINY_FONT,
+  SUB_TITLE_FONT_SIZE,
+} from './common'
 
 const getLabelParams = (index) => {
   let params = {}
@@ -153,8 +162,8 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
       mesh.name + '_JOB_textBlock',
       'Jobs',
       'black',
-      500,
-      16,
+      BOLD_FONT,
+      HEADER_FONT_SIZE,
       texts.headerMargins,
       texts.headerAignment
     )
@@ -165,8 +174,8 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
         mesh.name + '_' + i + '_JOB_title_textBlock',
         job.title,
         'black',
-        500,
-        14,
+        BOLD_FONT,
+        SUB_HEADER_FONT_SIZE,
         { ...texts.mainTextMargins, t: texts.mainTextMargins.t * i + top },
         texts.headerAignment
       )
@@ -174,8 +183,8 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
         mesh.name + '_' + i + '_JOB_company_textBlock',
         job.company,
         'black',
-        400,
-        12,
+        NORMAL_FONT,
+        FONT_SIZE,
         { ...texts.mainTextMargins, t: texts.mainTextMargins.t * i + 25 + top },
         texts.headerAignment
       )
@@ -183,8 +192,8 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
         mesh.name + '_' + i + '_JOB_description_textBlock',
         job.description,
         'black',
-        100,
-        12,
+        THINY_FONT,
+        FONT_SIZE,
         { ...texts.mainTextMargins, t: texts.mainTextMargins.t * i + 40 + top },
         texts.headerAignment
       )
@@ -198,8 +207,8 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
       mesh.name + '_textBlock',
       texts.header,
       'black',
-      500,
-      16,
+      BOLD_FONT,
+      HEADER_FONT_SIZE,
       texts.headerMargins,
       texts.headerAignment
     )
@@ -207,8 +216,8 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
       mesh.name + '_textBlock',
       texts.mainText,
       'black',
-      100,
-      12,
+      THINY_FONT,
+      FONT_SIZE,
       texts.mainTextMargins,
       texts.mainTextAignment
     )
@@ -318,8 +327,8 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
 export const getGUITitleLightHouse = (advancedTexture) => {
   let label = new GUI.Rectangle('lightHOuse-title')
   label.background = 'transparent'
-  label.height = '200px'
-  label.width = '380px'
+  label.height = '230px'
+  label.width = '420px'
   label.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
   label.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT
   label.zIndex = 10
@@ -331,9 +340,9 @@ export const getGUITitleLightHouse = (advancedTexture) => {
     'lightHOuse-title_textBlock',
     'CoFounder - Team Lead - Senior Software Engineer - Ethologist',
     'black',
-    500,
-    20,
-    { t: 5, b: 120, l: 10, r: 10 },
+    BOLD_FONT,
+    SUB_TITLE_FONT_SIZE,
+    { t: 5, b: 150, l: 10, r: 10 },
     {
       v: GUI.Control.VERTICAL_ALIGNMENT_BOTTOM,
       h: GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT,
@@ -343,9 +352,9 @@ export const getGUITitleLightHouse = (advancedTexture) => {
     'lightHOuse-title_textBlock',
     "I like to compare great leaders to a lighthouse. \nSteady whatever today's weather. Showing the way, in good and bad times. Seemingly useless when the sea is calm, absolutely vital when a hurricane hits. Not giving orders, but keeping everyone focused on the end goal.",
     'black',
-    100,
-    14,
-    { b: 5, t: 30, l: 10, r: 10 },
+    THINY_FONT,
+    HEADER_FONT_SIZE,
+    { b: 30, t: 30, l: 10, r: 10 },
     {
       v: GUI.Control.VERTICAL_ALIGNMENT_BOTTOM,
       h: GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT,

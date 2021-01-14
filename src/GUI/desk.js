@@ -1,4 +1,14 @@
 import * as GUI from 'babylonjs-gui'
+import {
+  HEADER_FONT_SIZE,
+  SUB_HEADER_FONT_SIZE,
+  FONT_SIZE,
+  BOLD_FONT,
+  NORMAL_FONT,
+  THINY_FONT,
+  TITLE_FONT_SIZE,
+  SUB_TITLE_FONT_SIZE,
+} from './common'
 
 const getLabelParams = (index) => {
   let params = {}
@@ -116,8 +126,8 @@ export const getGUIDesk = (index, mesh, advancedTexture, scene) => {
     mesh.name + '_textBlock',
     texts.header,
     'black',
-    500,
-    14,
+    BOLD_FONT,
+    SUB_HEADER_FONT_SIZE,
     texts.headerMargins,
     texts.headerAignment
   )
@@ -125,8 +135,8 @@ export const getGUIDesk = (index, mesh, advancedTexture, scene) => {
     mesh.name + '_textBlock',
     texts.mainText,
     'black',
-    100,
-    12,
+    THINY_FONT,
+    FONT_SIZE,
     texts.mainTextMargins,
     texts.mainTextAignment
   )
@@ -248,8 +258,8 @@ export const getGUITitleDesk = (scene, advancedTexture) => {
     'Desk-title_textBlock',
     'Senior Software Engineer',
     'black',
-    500,
-    20,
+    BOLD_FONT,
+    SUB_TITLE_FONT_SIZE,
     { t: 10, l: 10, r: 10 },
     {
       v: GUI.Control.VERTICAL_ALIGNMENT_TOP,
@@ -260,8 +270,8 @@ export const getGUITitleDesk = (scene, advancedTexture) => {
     'Desk-title_textBlock',
     'A person who never made a mistake never tried anything new',
     'black',
-    100,
-    14,
+    THINY_FONT,
+    SUB_HEADER_FONT_SIZE,
     { t: 40, l: 10, r: 10 },
     {
       v: GUI.Control.VERTICAL_ALIGNMENT_TOP,
@@ -272,8 +282,8 @@ export const getGUITitleDesk = (scene, advancedTexture) => {
     'Desk-title_textBlock',
     'Cit. Albert Einstaein',
     'black',
-    400,
-    10,
+    NORMAL_FONT,
+    FONT_SIZE,
     { t: 65, l: 10, r: 20 },
     {
       v: GUI.Control.VERTICAL_ALIGNMENT_TOP,

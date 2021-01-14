@@ -1,4 +1,11 @@
 import * as GUI from 'babylonjs-gui'
+import {
+  FONT_SIZE,
+  NORMAL_FONT,
+  THINY_FONT,
+  TITLE_FONT_SIZE,
+  SUB_TITLE_FONT_SIZE,
+} from './common'
 
 export const getGUILandingPage = (advancedTexture) => {
   let panelBorder = new GUI.StackPanel('borderMainStackPanel')
@@ -25,8 +32,8 @@ export const getGUILandingPage = (advancedTexture) => {
   preHeader.zIndex = 30
   preHeader.color = 'black'
   preHeader.fontFamily = 'Roboto'
-  preHeader.fontWeight = 100
-  preHeader.fontSize = 32
+  preHeader.fontWeight = THINY_FONT
+  preHeader.fontSize = TITLE_FONT_SIZE
   preHeader.heightInPixels = 40
   preHeader.textVerticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
   preHeader.textHorizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT
@@ -36,7 +43,8 @@ export const getGUILandingPage = (advancedTexture) => {
   header.zIndex = 31
   header.color = 'black'
   header.fontFamily = 'Roboto'
-  header.fontSize = 32
+  header.fontWeight = NORMAL_FONT
+  header.fontSize = TITLE_FONT_SIZE
   header.heightInPixels = 40
   header.textVerticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
   header.textHorizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT
@@ -49,8 +57,8 @@ export const getGUILandingPage = (advancedTexture) => {
   btnCenterBrain.zIndex = 40
   btnCenterBrain.color = 'black'
   btnCenterBrain.fontFamily = 'Roboto'
-  btnCenterBrain.fontWeight = 100
-  btnCenterBrain.fontSize = 24
+  btnCenterBrain.fontWeight = THINY_FONT
+  btnCenterBrain.fontSize = SUB_TITLE_FONT_SIZE
   btnCenterBrain.heightInPixels = 60
   btnCenterBrain.paddingTop = 30
   btnCenterBrain.paddingLeft = 130
@@ -64,8 +72,8 @@ export const getGUILandingPage = (advancedTexture) => {
   btnRightBrain.zIndex = 40
   btnRightBrain.color = 'black'
   btnRightBrain.fontFamily = 'Roboto'
-  btnRightBrain.fontWeight = 100
-  btnRightBrain.fontSize = 24
+  btnRightBrain.fontWeight = THINY_FONT
+  btnRightBrain.fontSize = SUB_TITLE_FONT_SIZE
   btnRightBrain.heightInPixels = 30
   btnRightBrain.paddingLeft = 115
   btnRightBrain.paddingRight = 0
@@ -78,8 +86,8 @@ export const getGUILandingPage = (advancedTexture) => {
   btnLeftBrain.zIndex = 40
   btnLeftBrain.color = 'black'
   btnLeftBrain.fontFamily = 'Roboto'
-  btnLeftBrain.fontWeight = 100
-  btnLeftBrain.fontSize = 24
+  btnLeftBrain.fontWeight = THINY_FONT
+  btnLeftBrain.fontSize = SUB_TITLE_FONT_SIZE
   btnLeftBrain.heightInPixels = 30
   btnLeftBrain.paddingLeft = 155
   btnLeftBrain.paddingRight = 0
@@ -89,8 +97,8 @@ export const getGUILandingPage = (advancedTexture) => {
   back.zIndex = 40
   back.color = 'transparent'
   back.fontFamily = 'Roboto'
-  back.fontWeight = 400
-  back.fontSize = 24
+  back.fontWeight = NORMAL_FONT
+  back.fontSize = SUB_TITLE_FONT_SIZE
   back.heightInPixels = 30
   back.paddingLeft = 0
   back.paddingRight = 0
@@ -103,8 +111,8 @@ export const getGUILandingPage = (advancedTexture) => {
   contacts.zIndex = 43
   contacts.color = 'black'
   contacts.fontFamily = 'Roboto'
-  contacts.fontWeight = 100
-  contacts.fontSize = 12
+  contacts.fontWeight = THINY_FONT
+  contacts.fontSize = FONT_SIZE
   contacts.heightInPixels = 50
   contacts.paddingTop = 30
   contacts.textVerticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
@@ -130,6 +138,7 @@ export const getGUILandingPage = (advancedTexture) => {
     panelBorder.width = '100px'
     panel.height = '230px'
     panel.width = '98px'
+    panelBorder.top = -200
   }
 
   const showMenu = () => {
@@ -137,6 +146,7 @@ export const getGUILandingPage = (advancedTexture) => {
     panelBorder.width = '282px'
     panel.height = '280px'
     panel.width = '280px'
+    panelBorder.top = 0
   }
 
   return {

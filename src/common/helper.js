@@ -17,7 +17,7 @@ export const getNewCamera = (id, scene, canvas, space_size) => {
     1,
     1,
     space_size * 10,
-    new BABYLON.Vector3.Zero(),
+    new BABYLON.Vector3(0, 5, 0),
     scene,
     true
   )
@@ -43,4 +43,76 @@ export const getNewLight = (id, scene) => {
   light.intensity = 0.005
   light.range = 100
   return light
+}
+
+export const setOutBrainAnimation = (
+  camera,
+  selectedBrainPart,
+  objToHide1,
+  objToHide2,
+  btnToHide1,
+  btnToHide2,
+  endTarget,
+  endPosition
+) => {
+  let animationPos = new BABYLON.Animation(
+    `desk-enter-animationPos`,
+    'position',
+    60,
+    BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+  )
+  let animationTarget = new BABYLON.Animation(
+    `desk-enter-animationTarget`,
+    'target',
+    60,
+    BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+  )
+  animationTarget.setKeys([
+    { frame: 0, value: camera.target.clone() },
+    { frame: 30, value: endTarget },
+  ])
+  animationPos.setKeys([
+    { frame: 0, value: camera.position.clone() },
+    { frame: 30, value: endPosition },
+  ])
+  camera.animations = []
+  camera.animations.push(animationTarget)
+  camera.animations.push(animationPos)
+  selectedBrainPart.setAlpha(0)
+  objToHide1.material.alpha = 0
+  objToHide2.material.alpha = 0
+  btnToHide1.color = '#c2c2c2'
+  btnToHide1.isPickable = false
+  btnToHide2.color = '#c2c2c2'
+  btnToHide2.isPickable = false
+}
+
+export const setCameraAnimation = (camera, endPosition, endTarget) => {
+  let animationPos = new BABYLON.Animation(
+    `desk-enter-animationPos`,
+    'position',
+    60,
+    BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+  )
+  let animationTarget = new BABYLON.Animation(
+    `desk-enter-animationTarget`,
+    'target',
+    60,
+    BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+  )
+  animationTarget.setKeys([
+    { frame: 0, value: camera.target.clone() },
+    { frame: 30, value: endTarget },
+  ])
+  animationPos.setKeys([
+    { frame: 0, value: camera.position.clone() },
+    { frame: 30, value: endPosition },
+  ])
+  camera.animations = []
+  camera.animations.push(animationTarget)
+  camera.animations.push(animationPos)
 }
