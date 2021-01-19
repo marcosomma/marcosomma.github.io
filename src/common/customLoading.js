@@ -20,6 +20,7 @@ BABYLON.DefaultLoadingScreen.prototype.displayLoadingUI = function () {
         font-family: Roboto !important;
         font-weight: 100;
         text-align:center;
+        line-height: 28px;
     }
     `
   document.getElementsByTagName('head')[0].appendChild(customLoadingScreenCss)

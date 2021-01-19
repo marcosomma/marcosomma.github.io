@@ -96,6 +96,7 @@ const getTextBox = (text, color, fontWeight, fontSize, margins, alignment) => {
   textBox.fontSize = fontSize
   textBox.color = color
   textBox.text = text
+  textBox.lineWidth = fontSize
   if (margins.t) textBox.paddingTop = margins.t
   if (margins.b) textBox.paddingBottom = margins.b
   if (margins.r) textBox.paddingRight = margins.r
