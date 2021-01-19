@@ -137,13 +137,13 @@ export const getGUIBrainPart = (fileName, importedBrainPart, advancedTexture) =>
     texts.mainTextAignment
   )
 
-  header.onLinesReadyObservable.addOnce(() => {
-    header.fontOffset.height = SUB_HEADER_FONT_SIZE * 1.8
-  })
+  // header.onLinesReadyObservable.addOnce(() => {
+  //   header.fontOffset.height = SUB_HEADER_FONT_SIZE * 1.8
+  // })
 
-  mainText.onLinesReadyObservable.addOnce(() => {
-    header.fontOffset.height = FONT_SIZE * 1.8
-  })
+  // mainText.onLinesReadyObservable.addOnce(() => {
+  //   header.fontOffset.height = FONT_SIZE * 1.8
+  // })
 
   label.addControl(header)
   label.addControl(mainText)

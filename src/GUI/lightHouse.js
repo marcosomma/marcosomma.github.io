@@ -161,9 +161,9 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
       texts.headerAignment
     )
 
-    header.onLinesReadyObservable.addOnce(() => {
-      header.fontOffset.height = HEADER_FONT_SIZE * 1.8
-    })
+    // header.onLinesReadyObservable.addOnce(() => {
+    //   header.fontOffset.height = HEADER_FONT_SIZE * 1.8
+    // })
     label.addControl(header)
     texts.jobs.forEach((job, i) => {
       let top = 50 * (i + 1)
@@ -195,17 +195,17 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
         texts.headerAignment
       )
 
-      title.onLinesReadyObservable.addOnce(() => {
-        title.fontOffset.height = SUB_HEADER_FONT_SIZE * 1.8
-      })
+      // title.onLinesReadyObservable.addOnce(() => {
+      //   title.fontOffset.height = SUB_HEADER_FONT_SIZE * 1.8
+      // })
 
-      company.onLinesReadyObservable.addOnce(() => {
-        company.fontOffset.height = FONT_SIZE * 1.8
-      })
+      // company.onLinesReadyObservable.addOnce(() => {
+      //   company.fontOffset.height = FONT_SIZE * 1.8
+      // })
 
-      description.onLinesReadyObservable.addOnce(() => {
-        description.fontOffset.height = FONT_SIZE * 1.8
-      })
+      // description.onLinesReadyObservable.addOnce(() => {
+      //   description.fontOffset.height = FONT_SIZE * 1.8
+      // })
 
       label.addControl(title)
       label.addControl(company)
@@ -231,13 +231,13 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
       texts.mainTextAignment
     )
 
-    header.onLinesReadyObservable.addOnce(() => {
-      header.fontOffset.height = HEADER_FONT_SIZE * 1.8
-    })
+    // header.onLinesReadyObservable.addOnce(() => {
+    //   header.fontOffset.height = HEADER_FONT_SIZE * 1.8
+    // })
 
-    mainText.onLinesReadyObservable.addOnce(() => {
-      header.fontOffset.height = FONT_SIZE * 1.8
-    })
+    // mainText.onLinesReadyObservable.addOnce(() => {
+    //   header.fontOffset.height = FONT_SIZE * 1.8
+    // })
 
     label.addControl(header)
     label.addControl(mainText)

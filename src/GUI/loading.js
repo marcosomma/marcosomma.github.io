@@ -23,9 +23,9 @@ export const getGUILoading = (advancedTexture) => {
   text.textVerticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER
   text.textHorizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER
 
-  text.onLinesReadyObservable.addOnce(() => {
-    text.fontOffset.height = FONT_SIZE * 1.5
-  })
+  // text.onLinesReadyObservable.addOnce(() => {
+  //   text.fontOffset.height = FONT_SIZE * 1.5
+  // })
 
   Loading.addControl(text)
   advancedTexture.addControl(Loading)

@@ -62,7 +62,7 @@ export const getGUILandingPage = (advancedTexture) => {
   btnRightBrain.fontFamily = 'Roboto'
   btnRightBrain.fontWeight = THINY_FONT
   btnRightBrain.fontSize = SUB_TITLE_FONT_SIZE
-  btnRightBrain.heightInPixels = 35
+  btnRightBrain.heightInPixels = 30
   btnRightBrain.paddingLeft = 115
   btnRightBrain.paddingRight = 0
   btnRightBrain.thickness = 0
