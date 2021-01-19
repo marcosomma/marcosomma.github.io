@@ -96,7 +96,6 @@ const getTextBox = (text, color, fontWeight, fontSize, margins, alignment) => {
   textBox.fontSize = fontSize
   textBox.color = color
   textBox.text = text
-  textBox.lineWidth = fontSize
   if (margins.t) textBox.paddingTop = margins.t
   if (margins.b) textBox.paddingBottom = margins.b
   if (margins.r) textBox.paddingRight = margins.r
@@ -137,6 +136,14 @@ export const getGUIBrainPart = (fileName, importedBrainPart, advancedTexture) =>
     texts.mainTextMargins,
     texts.mainTextAignment
   )
+
+  header.onLinesReadyObservable.addOnce(() => {
+    header.fontOffset.height = SUB_HEADER_FONT_SIZE * 1.8
+  })
+
+  mainText.onLinesReadyObservable.addOnce(() => {
+    header.fontOffset.height = FONT_SIZE * 1.8
+  })
 
   label.addControl(header)
   label.addControl(mainText)
