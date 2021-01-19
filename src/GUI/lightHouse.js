@@ -227,7 +227,7 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
 
   let endRound = new GUI.Ellipse()
   endRound.width = '20px'
-  endRound.background = 'white'
+  endRound.background = '#b00020'
   endRound.height = '20px'
   endRound.color = 'black'
   endRound.thickness = 1
@@ -270,9 +270,9 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
 
 export const getGUITitleLightHouse = (advancedTexture) => {
   let label = new GUI.Rectangle('lightHOuse-title')
-  label.background = 'transparent'
-  label.height = '230px'
-  label.width = '420px'
+  label.background = 'white'
+  label.height = '210px'
+  label.width = '410px'
   label.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
   label.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT
   label.zIndex = 10
@@ -286,7 +286,7 @@ export const getGUITitleLightHouse = (advancedTexture) => {
     'black',
     BOLD_FONT,
     SUB_TITLE_FONT_SIZE,
-    { t: 5, b: 150, l: 10, r: 10 },
+    { t: 5, b: 130, l: 10, r: 10 },
     {
       v: GUI.Control.VERTICAL_ALIGNMENT_BOTTOM,
       h: GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT,
@@ -298,7 +298,7 @@ export const getGUITitleLightHouse = (advancedTexture) => {
     'black',
     THINY_FONT,
     HEADER_FONT_SIZE,
-    { b: 30, t: 30, l: 10, r: 10 },
+    { b: 10, t: 30, l: 10, r: 10 },
     {
       v: GUI.Control.VERTICAL_ALIGNMENT_BOTTOM,
       h: GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT,

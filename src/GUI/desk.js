@@ -166,11 +166,11 @@ export const getGUIDesk = (index, mesh, advancedTexture, scene) => {
 
   let endRound = new GUI.Ellipse()
   endRound.width = '20px'
-  endRound.background = 'white'
+  endRound.background = '#018786'
   endRound.height = '20px'
   endRound.color = 'black'
   endRound.thickness = 1
-  endRound.alpha = 0.5
+  endRound.alpha = 0.4
   advancedTexture.addControl(endRound)
   endRound.linkWithMesh(mesh)
 
@@ -209,8 +209,8 @@ export const getGUIDesk = (index, mesh, advancedTexture, scene) => {
 
 export const getGUITitleDesk = (scene, advancedTexture) => {
   let label = new GUI.Rectangle('Desk-title')
-  label.background = 'transparent'
-  label.height = '200px'
+  label.background = 'white'
+  label.height = '90px'
   label.width = '400px'
   label.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
   label.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER
@@ -259,69 +259,5 @@ export const getGUITitleDesk = (scene, advancedTexture) => {
   label.addControl(mainText)
   label.addControl(citText)
 
-  var font_size = 20
-  var font = font_size + 'px Roboto'
-  var planeHeight = 0.5
-
-  var DTHeight = 1.5 * font_size
-
-  var ratio = planeHeight / DTHeight
-  var textFront = 'FrontEnd & Videogames'
-  var textBack = 'Backend & Infrastructure'
-  var textMain = "Marco's desk"
-  var temp = new BABYLON.DynamicTexture('DynamicTexture', 64, scene)
-  var tmpctx = temp.getContext()
-  tmpctx.font = font
-  var DTWidth = tmpctx.measureText(textFront).width + 8
-  var planeWidth = DTWidth * ratio
-  var dynamicTextureFront = new BABYLON.DynamicTexture(
-    'dynamicTextureFront',
-    { width: DTWidth, height: DTHeight },
-    scene,
-    false
-  )
-  var matFront = new BABYLON.StandardMaterial('mat', scene)
-  matFront.backFaceCulling = false
-  matFront.diffuseTexture = dynamicTextureFront
-  dynamicTextureFront.drawText(textFront, null, null, font, '#000000', '#ffffff', true)
-  var planeFront = BABYLON.MeshBuilder.CreatePlane('plane', { width: planeWidth, height: planeHeight }, scene)
-  planeFront.material = matFront
-  planeFront.rotation.y = Math.PI / 2
-  planeFront.position.x = -0.2
-  planeFront.position.y = 6.2
-  planeFront.position.z = 4
-
-  var dynamicTextureMain = new BABYLON.DynamicTexture(
-    'dynamicTextureMain',
-    { width: DTWidth, height: DTHeight },
-    scene,
-    false
-  )
-  var matMain = new BABYLON.StandardMaterial('mat', scene)
-  matMain.backFaceCulling = false
-  matMain.diffuseTexture = dynamicTextureMain
-  dynamicTextureMain.drawText(textBack, null, null, font, '#000000', '#ffffff', true)
-  var planeBack = BABYLON.MeshBuilder.CreatePlane('plane', { width: planeWidth, height: planeHeight }, scene)
-  planeBack.material = matMain
-  planeBack.rotation.y = -Math.PI / 2
-  planeBack.position.x = 0.04
-  planeBack.position.y = 6.2
-  planeBack.position.z = 4
-
-  var dynamicTextureMain = new BABYLON.DynamicTexture(
-    'dynamicTextureMain',
-    { width: DTWidth, height: DTHeight },
-    scene,
-    false
-  )
-  var matMain = new BABYLON.StandardMaterial('mat', scene)
-  matMain.diffuseTexture = dynamicTextureMain
-  dynamicTextureMain.drawText(textMain, null, null, font, '#000000', '#ffffff', true)
-  var planeMain = BABYLON.MeshBuilder.CreatePlane('plane', { width: planeWidth, height: planeHeight }, scene)
-  planeMain.material = matMain
-  planeMain.rotation.y = Math.PI
-  planeMain.position.x = 0
-  planeMain.position.y = 5.1
-  planeMain.position.z = 6.2
-  return [planeFront, planeBack, planeMain, label]
+  return [label]
 }

@@ -1,15 +1,25 @@
 import * as BABYLON from 'babylonjs'
 import * as GUI from 'babylonjs-gui'
-import { getGUILandingPage, getGUITitleDesk, getGUITitleLightHouse } from '../GUI'
+import { getGUILandingPage, getGUITitleDesk, getGUITitleLightHouse, getGUILoading } from '../GUI'
 import { setInteractiveLayerLightHouse, setInteractiveLayerDesk } from '../actions'
 import { importBrainPart, importLightHouse, importDesk, importCreative } from '../imports'
-import { getNewCamera, getNewLight, setOutBrainAnimation, setCameraAnimation } from '../common/helper'
+import {
+  getNewCamera,
+  getNewLight,
+  setOutBrainAnimation,
+  setCameraAnimation,
+  setChangeColorBackgroundAnimation,
+} from '../common/helper'
+import { createEnvironment as createLightHouseEnviroment } from './lightHouse'
+import { createEnvironment as createDeskEnviroment } from './desk'
+import { NIGHT_BLUE, DAY_BLUE, LIGHT_BLUE } from '../common/colors'
 // BABYLON.Logger.LogLevels = 3
 
 let selected = undefined
 let pageTitle = undefined
 let root = ''
 let rootRendered = false
+let latestBackground = new BABYLON.Color3(1, 1, 1)
 
 const setBtnListeners = (
   btnCenterBrain,
@@ -82,8 +92,8 @@ const setBtnListeners = (
       centerBrain,
       btnRightBrain,
       btnCenterBrain,
-      new BABYLON.Vector3(-50, 5, 0),
-      new BABYLON.Vector3(-50, 7.5, 30)
+      new BABYLON.Vector3(-100, 5, 0),
+      new BABYLON.Vector3(-100, 7.5, 30)
     )
     scene.beginAnimation(camera, 0, 60, false, 1, () => {
       root = 'left'
@@ -118,8 +128,8 @@ const setBtnListeners = (
       centerBrain,
       btnLeftBrain,
       btnCenterBrain,
-      new BABYLON.Vector3(50, 5, 0),
-      new BABYLON.Vector3(50, 7.5, 30)
+      new BABYLON.Vector3(100, 5, 0),
+      new BABYLON.Vector3(100, 7.5, 30)
     )
     scene.beginAnimation(camera, 0, 60, false, 1, () => {
       root = 'right'
@@ -150,10 +160,11 @@ const setBtnListeners = (
 }
 
 export const Create = (engine, scene, canvas, container, report, space_size) => {
-  console.log(GUI.AdvancedDynamicTexture)
   const camera = getNewCamera('mainCamera', scene, canvas, space_size)
   const light = getNewLight('mainLight', scene)
   const advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('LandingUi')
+  const Loading = getGUILoading(advancedTexture)
+  Loading.isVisible = false
 
   camera.actionManager = new BABYLON.ActionManager(scene)
 
@@ -184,16 +195,15 @@ export const Create = (engine, scene, canvas, container, report, space_size) => 
       camera,
       scene
     )
-    container.cameras.push(camera)
-    container.lights.push(light)
     camera.setPosition(new BABYLON.Vector3(0, 7.5, 30))
-    camera.setTarget(new BABYLON.Vector3(0, 5, 0))
+    camera.setTarget(new BABYLON.Vector3(0, 0, 0))
 
-    scene.registerBeforeRender(function () {
+    scene.registerBeforeRender(() => {
       switch (root) {
         case 'right':
           if (rootRendered) return
           rootRendered = true
+          Loading.isVisible = true
           hideMenu()
           setInteractiveLayerDesk(container, advancedTexture, scene, camera)
           pageTitle = getGUITitleDesk(scene, advancedTexture)
@@ -201,58 +211,110 @@ export const Create = (engine, scene, canvas, container, report, space_size) => 
             desk.forEach((mesh) => {
               container.meshes.push(mesh)
             })
+            createDeskEnviroment(scene).then((deskEnv) => {
+              deskEnv.meshes.forEach((envMesh) => {
+                container.meshes.push(envMesh)
+              })
+              latestBackground = DAY_BLUE
+              setChangeColorBackgroundAnimation(
+                'to-desk-animation',
+                new BABYLON.Color3(1, 1, 1),
+                latestBackground,
+                scene
+              )
+              setCameraAnimation(camera, new BABYLON.Vector3(0, 7.5, 30), new BABYLON.Vector3(0, 5, 0))
+              Loading.isVisible = false
+              scene.beginAnimation(camera, 0, 60, false)
+              scene.beginAnimation(scene, 0, 60, false)
+            })
           })
-          setCameraAnimation(camera, new BABYLON.Vector3(0, 7.5, 30), new BABYLON.Vector3(0, 5, 0))
-          scene.beginAnimation(camera, 0, 60, false)
-          scene.fogDensity = 0.001
+
           break
         case 'left':
           if (rootRendered) return
           rootRendered = true
+          Loading.isVisible = true
           hideMenu()
           importCreative(scene).then((creative) => {
             creative.forEach((mesh) => {
               container.meshes.push(mesh)
+              latestBackground = LIGHT_BLUE
+              setChangeColorBackgroundAnimation(
+                'to-creativity-animation',
+                new BABYLON.Color3(1, 1, 1),
+                latestBackground,
+                scene
+              )
+              setCameraAnimation(camera, new BABYLON.Vector3(0, 7.5, 30), new BABYLON.Vector3(0, 5, 0))
+              Loading.isVisible = false
+              scene.beginAnimation(camera, 0, 60, false)
+              scene.beginAnimation(scene, 0, 60, false)
             })
           })
-          setCameraAnimation(camera, new BABYLON.Vector3(0, 7.5, 30), new BABYLON.Vector3(0, 5, 0))
-          scene.beginAnimation(camera, 0, 60, false)
+
           break
         case 'center':
           if (rootRendered) return
           rootRendered = true
+          Loading.isVisible = true
           hideMenu()
           setInteractiveLayerLightHouse(container, advancedTexture, scene)
           pageTitle = getGUITitleLightHouse(advancedTexture)
-          importLightHouse(scene).then((paperHouse) => {
-            paperHouse.forEach((mesh, i) => {
-              container.meshes.push(mesh)
+          createLightHouseEnviroment(scene).then((lightHouseEnv) => {
+            light.setEnabled(false)
+            importLightHouse(scene).then((paperHouse) => {
+              paperHouse.forEach((mesh, i) => {
+                container.meshes.push(mesh)
+              })
             })
+            lightHouseEnv.meshes.forEach((envMesh) => {
+              container.meshes.push(envMesh)
+            })
+            lightHouseEnv.lights.forEach((envLight) => {
+              container.lights.push(envLight)
+            })
+            latestBackground = NIGHT_BLUE
+            setChangeColorBackgroundAnimation(
+              'to-lightHouse-animation',
+              new BABYLON.Color3(1, 1, 1),
+              latestBackground,
+              scene
+            )
+            setCameraAnimation(camera, new BABYLON.Vector3(0, 2.1, 30), new BABYLON.Vector3(0, 5, 0))
+            Loading.isVisible = false
+            scene.beginAnimation(camera, 0, 60, false)
+            scene.beginAnimation(scene, 0, 60, false)
           })
-          setCameraAnimation(camera, new BABYLON.Vector3(0, 7.5, 30), new BABYLON.Vector3(0, 5, 0))
-          scene.beginAnimation(camera, 0, 60, false)
-          scene.ambientColor = new BABYLON.Color3(1, 1, 1)
-          scene.fogMode = BABYLON.Scene.FOGMODE_EXP
-          scene.fogColor = new BABYLON.Color3(0.5, 0.9, 0.8)
-          scene.fogDensity = 0.01
           break
 
         default:
-          if (container.meshes) {
-            console.log(container.meshes.length, 'mesh to remove')
-            container.meshes.forEach((element, index) => {
-              element.dispose()
-            })
-            container.meshes = []
-          }
+          if (!light.isEnabled()) light.setEnabled(true)
+          if (container.meshes.length) console.log(container.meshes.length, 'mesh to remove')
+          if (container.lights.length) console.log(container.lights.length, 'lights to remove')
+          container.meshes.forEach((element, index) => {
+            element.dispose()
+          })
+          container.lights.forEach((element, index) => {
+            element.dispose()
+          })
+          container.meshes = []
+          container.lights = []
           if (rootRendered) {
-            setCameraAnimation(camera, new BABYLON.Vector3(0, 7.5, 30), new BABYLON.Vector3(0, 5, 0))
-            scene.beginAnimation(camera, 0, 60, false)
-            showMenu()
             if (pageTitle) {
               if (Array.isArray(pageTitle)) pageTitle.forEach((element) => element.dispose())
               else pageTitle.dispose()
             }
+            setCameraAnimation(camera, new BABYLON.Vector3(0, 7.5, 30), new BABYLON.Vector3(0, 0, 0))
+            setChangeColorBackgroundAnimation(
+              'back-to-landing-animation',
+              latestBackground,
+              new BABYLON.Color3(1, 1, 1),
+              scene
+            )
+            scene.beginAnimation(camera, 0, 60, false)
+            scene.beginAnimation(scene, 0, 60, false)
+            showMenu()
+            latestBackground = new BABYLON.Color3(1, 1, 1)
             scene.ambientColor = new BABYLON.Color3(0.25, 0.25, 0.25)
             scene.fogMode = BABYLON.Scene.FOGMODE_EXP
             scene.fogColor = new BABYLON.Color3(0.9, 0.9, 0.8)

@@ -14,11 +14,12 @@ export const getNewScene = (engine) => {
 export const getNewCamera = (id, scene, canvas, space_size) => {
   let camera = new BABYLON.ArcRotateCamera(id, 1, 1, space_size * 10, new BABYLON.Vector3(0, 5, 0), scene, true)
   camera.attachControl(canvas, false, false, 1)
-  camera.collisionRadius = new BABYLON.Vector3(10, 10, 10)
-  camera.lowerRadiusLimit = 20
+  camera.collisionRadius = new BABYLON.Vector3(2, 2, 2)
+  camera.lowerRadiusLimit = 10
   camera.wheelPrecision = 200
   camera.lowerRadiusLimit = 20
   camera.upperRadiusLimit = 30
+  camera.checkCollisions = true
 
   return camera
 }
@@ -66,11 +67,11 @@ export const setOutBrainAnimation = (
   )
   animationTarget.setKeys([
     { frame: 0, value: camera.target.clone() },
-    { frame: 15, value: endTarget },
+    { frame: 30, value: endTarget },
   ])
   animationPos.setKeys([
     { frame: 0, value: camera.position.clone() },
-    { frame: 15, value: endPosition },
+    { frame: 30, value: endPosition },
   ])
   camera.animations = []
   camera.animations.push(animationTarget)
@@ -103,4 +104,27 @@ export const setCameraAnimation = (camera, endPosition, endTarget) => {
   camera.animations = []
   camera.animations.push(animationTarget)
   camera.animations.push(animationPos)
+}
+
+export const setChangeColorBackgroundAnimation = (id, startColor, endColor, scene) => {
+  let animation = new BABYLON.Animation(
+    id,
+    'clearColor',
+    60,
+    BABYLON.Animation.ANIMATIONTYPE_COLOR3,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+  )
+  animation.setKeys([
+    {
+      frame: 0,
+      value: startColor,
+    },
+    {
+      frame: 30,
+      value: endColor,
+    },
+  ])
+  scene.animations = []
+  scene.animations.push(animation)
+  return scene
 }

@@ -6,20 +6,18 @@ export const importDesk = (scene) =>
   new Promise((resolve, reject) => {
     BABYLON.SceneLoader.LoadAssetContainer('/assets/models/', `Desk.obj`, scene, (assets) => {
       assets.addAllToScene()
-      // let materialsDic = {}
-      // assets.materials.forEach((material) => {
-      //   let mat = new BABYLON.StandardMaterial(material.name, scene)
-      //   mat.diffuseColor = material.diffuseColor
-      //   mat.emissiveColor = material.emissiveColor
 
-      //   materialsDic[material.name] = mat
-      // })
+      // let env = scene.createDefaultEnvironment()
+      // env.skybox.scaling = SCALE
+      // env.ground.scaling = SCALE
+      // env.skyboxMaterial.diffuseColor = new BABYLON.Color3(1, 1, 1)
+      // env.groundMaterial.diffuseColor = new BABYLON.Color3(1, 1, 1)
+      // env.ground.scaling = SCALE
+      // console.log('env', env)
 
       assets.meshes.forEach((mesh) => {
-        // let meshMatName = Object.keys(materialsDic).filter((val, i) => mesh.name.indexOf(val) !== -1)
-
         mesh.scaling = SCALE
-        // mesh.material = materialsDic[meshMatName[0]]
+        mesh.isPickable = false
       })
       resolve(assets.meshes)
     })

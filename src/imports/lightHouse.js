@@ -19,6 +19,7 @@ export const importLightHouse = (scene) =>
         let meshMatName = Object.keys(materialsDic).filter((val, i) => mesh.name.indexOf(val) !== -1)
 
         mesh.scaling = SCALE
+        mesh.isPickable = false
         mesh.material = materialsDic[meshMatName[0]]
       })
 
