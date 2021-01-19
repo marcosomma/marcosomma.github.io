@@ -163,6 +163,8 @@ export const Create = (engine, scene, canvas, container, report, space_size) => 
   const camera = getNewCamera('mainCamera', scene, canvas, space_size)
   const light = getNewLight('mainLight', scene)
   const advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('LandingUi')
+  advancedTexture.idealHeight = 900
+  advancedTexture.idealWidth = 1440
   const Loading = getGUILoading(advancedTexture)
   Loading.isVisible = false
 

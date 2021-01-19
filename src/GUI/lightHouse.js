@@ -13,13 +13,13 @@ const getLabelParams = (index) => {
   let params = {}
   switch (index) {
     case 1:
-      params.h = '330px'
+      params.h = '280px'
       params.w = '600px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT
       break
     case 2:
-      params.h = '280px'
+      params.h = '245px'
       params.w = '600px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT
@@ -177,7 +177,7 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
         'black',
         NORMAL_FONT,
         FONT_SIZE,
-        { ...texts.mainTextMargins, t: texts.mainTextMargins.t * i + 25 + top },
+        { ...texts.mainTextMargins, t: texts.mainTextMargins.t * i + 20 + top },
         texts.headerAignment
       )
       const description = getTextBox(
@@ -286,7 +286,7 @@ export const getGUITitleLightHouse = (advancedTexture) => {
     'black',
     BOLD_FONT,
     SUB_TITLE_FONT_SIZE,
-    { t: 5, b: 130, l: 10, r: 10 },
+    { t: 5, b: 135, l: 10, r: 10 },
     {
       v: GUI.Control.VERTICAL_ALIGNMENT_BOTTOM,
       h: GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT,
@@ -298,7 +298,7 @@ export const getGUITitleLightHouse = (advancedTexture) => {
     'black',
     THINY_FONT,
     HEADER_FONT_SIZE,
-    { b: 10, t: 30, l: 10, r: 10 },
+    { b: 10, t: 40, l: 10, r: 10 },
     {
       v: GUI.Control.VERTICAL_ALIGNMENT_BOTTOM,
       h: GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT,

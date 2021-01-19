@@ -14,27 +14,27 @@ const getLabelParams = (fileName) => {
   let params = {}
   switch (fileName) {
     case 'CX':
-      params.h = '110px'
+      params.h = '95px'
       params.w = '550px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER
       break
     case 'LX':
-      params.h = '180px'
+      params.h = '155px'
       params.w = '420px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT
       params.paddingRight = 150
       break
     case 'RX':
-      params.h = '180px'
+      params.h = '155px'
       params.w = '420px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT
       params.paddingLeft = 150
       break
     default:
-      params.h = '350px'
+      params.h = '340px'
       params.w = '550px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER
@@ -44,22 +44,22 @@ const getLabelParams = (fileName) => {
 
 const getTexts = (fileName) => {
   let text = {
-    headerMargins: { t: 5, l: 5 },
+    headerMargins: { t: 5, l: 10, r: 10 },
     headerAignment: {
       v: GUI.Control.VERTICAL_ALIGNMENT_TOP,
       h: GUI.Control.HORIZONTAL_ALIGNMENT_LEFT,
     },
-    mainTextMargins: { t: 30, l: 5, r: 5 },
+    mainTextMargins: { t: 30, l: 10, r: 10 },
     mainTextAignment: {
       v: GUI.Control.VERTICAL_ALIGNMENT_TOP,
       h: GUI.Control.HORIZONTAL_ALIGNMENT_LEFT,
     },
-    citMargins: { b: 15, l: 5 },
+    citMargins: { b: 15, l: 10, r: 10 },
     citAignment: {
       v: GUI.Control.VERTICAL_ALIGNMENT_BOTTOM,
       h: GUI.Control.HORIZONTAL_ALIGNMENT_LEFT,
     },
-    citAuthMargins: { b: 0, r: 5 },
+    citAuthMargins: { b: 0, l: 10, r: 10 },
     citAuthAignment: {
       v: GUI.Control.VERTICAL_ALIGNMENT_BOTTOM,
       h: GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT,
