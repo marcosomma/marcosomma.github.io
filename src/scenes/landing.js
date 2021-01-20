@@ -305,8 +305,6 @@ export const Create = (engine, scene, canvas, container, report, space_size) => 
           if (!light.isEnabled()) light.setEnabled(true)
           if (light.intensity !== 1.2) light.intensity = 1.2
           if (light.diffuse !== new BABYLON.Color3.White()) light.diffuse = new BABYLON.Color3.White()
-          if (container.meshes.length) console.log(container.meshes.length, 'mesh to remove')
-          if (container.lights.length) console.log(container.lights.length, 'lights to remove')
           if (scene.fogDensity !== 0.01) scene.fogDensity = 0.01
           container.meshes.forEach((element, index) => {
             element.dispose()

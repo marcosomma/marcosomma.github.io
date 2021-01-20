@@ -24,10 +24,9 @@ export const getNewCamera = (id, scene, canvas, space_size) => {
 }
 
 export const getNewLight = (scene) => {
-  var light = new BABYLON.HemisphericLight('hemiLight', new BABYLON.Vector3(0, 1, 0), scene)
+  let light = new BABYLON.HemisphericLight('hemiLight', new BABYLON.Vector3(0, 1, 0), scene)
   light.diffuse = new BABYLON.Color3.White()
   light.specular = new BABYLON.Color3.White()
-
   light.intensity = 1.2
   light.range = 100
   return light

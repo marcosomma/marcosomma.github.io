@@ -55,7 +55,7 @@ export const createEnvironment = (scene) =>
     //   seaMaterial.emissiveColor =
     plane.material = seaMaterial
     plane.position.y = -3.5
-    var lightHouse1 = new BABYLON.SpotLight(
+    let lightHouse1 = new BABYLON.SpotLight(
       'spotLight1',
       new BABYLON.Vector3(0, 20, 0),
       new BABYLON.Vector3(0, -1, 0),
@@ -63,7 +63,7 @@ export const createEnvironment = (scene) =>
       10,
       scene
     )
-    var lightHouse2 = new BABYLON.SpotLight(
+    let lightHouse2 = new BABYLON.SpotLight(
       'spotLight2',
       new BABYLON.Vector3(0, 0, 9),
       new BABYLON.Vector3(0, 0.5, -0.5),
@@ -71,7 +71,7 @@ export const createEnvironment = (scene) =>
       20,
       scene
     )
-    var lightHouse3 = new BABYLON.SpotLight(
+    let lightHouse3 = new BABYLON.SpotLight(
       'spotLight3',
       new BABYLON.Vector3(0, 0, -9),
       new BABYLON.Vector3(0, 1, 1),
@@ -92,7 +92,6 @@ export const createEnvironment = (scene) =>
     createNewSystem(scene)
 
     plane.onDisposeObservable.add(() => {
-      console.log(particleSystem)
       particleSystem.dispose()
     })
 
@@ -101,5 +100,5 @@ export const createEnvironment = (scene) =>
     scene.fogDensity = 0.02
     resolve({ meshes: [plane], lights: [lightHouse1, lightHouse2, lightHouse3] })
   }).catch((e) => {
-    console.log('desk catch error', e)
+    console.log('lightHouse catch error', e)
   })

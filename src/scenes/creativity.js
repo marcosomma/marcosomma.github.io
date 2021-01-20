@@ -5,5 +5,5 @@ export const createEnvironment = (scene) =>
   new Promise((resolve, reject) => {
     resolve({ meshes: [] })
   }).catch((e) => {
-    console.log('desk catch error', e)
+    console.log('creativity catch error', e)
   })

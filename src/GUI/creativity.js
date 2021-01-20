@@ -101,7 +101,6 @@ const getTextBox = (id, text, color, fontWeight, fontSize, margins, alignment) =
 }
 
 export const getGUICretivity = (index, mesh, advancedTexture, scene) => {
-  console.log(index, mesh)
   let label = new GUI.Rectangle('label for ' + mesh.name)
   let labelParams = getLabelParams(index)
   label.background = '#f1f1f1'
@@ -189,7 +188,6 @@ export const getGUICretivity = (index, mesh, advancedTexture, scene) => {
 }
 
 export const getGUITitleCreativity = (scene, advancedTexture) => {
-  console.log('getGUITitleCreativity')
   let label = new GUI.Rectangle('Creativity-title')
   label.background = 'white'
   label.height = '140px'
@@ -241,7 +239,6 @@ export const getGUITitleCreativity = (scene, advancedTexture) => {
   label.addControl(header)
   label.addControl(mainText)
   label.addControl(citText)
-  console.log(label)
 
   return [label]
 }
