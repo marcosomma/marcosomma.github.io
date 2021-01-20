@@ -36,7 +36,7 @@ const setAction = (actionPoint, targetClick, lightSpot, valuePositionClick, inte
   )
 
   actionPoint.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, lightSpot, 'intensity', 1, 60)
+    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, lightSpot, 'intensity', 2, 60)
   )
   actionPoint.actionManager.registerAction(
     new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOutTrigger, lightSpot, 'intensity', 0, 60)
