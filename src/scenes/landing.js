@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs'
 import * as GUI from 'babylonjs-gui'
-import { getGUILandingPage, getGUITitleDesk, getGUITitleLightHouse, getGUILoading } from '../GUI'
-import { setInteractiveLayerLightHouse, setInteractiveLayerDesk } from '../actions'
+import { getGUILandingPage, getGUITitleDesk, getGUITitleLightHouse, getGUITitleCreativity, getGUILoading } from '../GUI'
+import { setInteractiveLayerLightHouse, setInteractiveLayerDesk, setInteractiveLayerCreativity } from '../actions'
 import { importBrainPart, importLightHouse, importDesk, importCreative } from '../imports'
 import {
   getNewCamera,
@@ -12,7 +12,8 @@ import {
 } from '../common/helper'
 import { createEnvironment as createLightHouseEnviroment } from './lightHouse'
 import { createEnvironment as createDeskEnviroment } from './desk'
-import { NIGHT_BLUE, DAY_BLUE, LIGHT_BLUE } from '../common/colors'
+import { createEnvironment as createCreativityEnviroment } from './creativity'
+import { NIGHT_BLUE, DAY_BLUE, NIGHT_DARK } from '../common/colors'
 // BABYLON.Logger.LogLevels = 3
 
 let selected = undefined
@@ -207,7 +208,7 @@ export const Create = (engine, scene, canvas, container, report, space_size) => 
           rootRendered = true
           Loading.isVisible = true
           hideMenu()
-          setInteractiveLayerDesk(container, advancedTexture, scene, camera)
+          setInteractiveLayerDesk(container, advancedTexture, scene)
           pageTitle = getGUITitleDesk(scene, advancedTexture)
           light.intensity = 1.5
           light.diffuse = new BABYLON.Color3.FromHexString('#fbfbfb')
@@ -239,17 +240,26 @@ export const Create = (engine, scene, canvas, container, report, space_size) => 
           rootRendered = true
           Loading.isVisible = true
           hideMenu()
+          setInteractiveLayerCreativity(container, advancedTexture, scene, camera)
+          pageTitle = getGUITitleCreativity(scene, advancedTexture)
+          light.setEnabled(false)
           importCreative(scene).then((creative) => {
-            creative.forEach((mesh) => {
-              container.meshes.push(mesh)
-              latestBackground = LIGHT_BLUE
+            createCreativityEnviroment(scene).then((creativityEnv) => {
+              creative.forEach((mesh) => {
+                container.meshes.push(mesh)
+              })
+              creativityEnv.meshes.forEach((envMesh) => {
+                container.meshes.push(envMesh)
+              })
+              scene.fogDensity = 0
+              latestBackground = NIGHT_DARK
               setChangeColorBackgroundAnimation(
                 'to-creativity-animation',
                 new BABYLON.Color3(1, 1, 1),
                 latestBackground,
                 scene
               )
-              setCameraAnimation(camera, new BABYLON.Vector3(0, 7.5, 30), new BABYLON.Vector3(0, 5, 0))
+              setCameraAnimation(camera, new BABYLON.Vector3(0, 7.5, 40), new BABYLON.Vector3(0, 5, 0))
               Loading.isVisible = false
               scene.beginAnimation(camera, 0, 60, false)
               scene.beginAnimation(scene, 0, 60, false)
@@ -262,11 +272,11 @@ export const Create = (engine, scene, canvas, container, report, space_size) => 
           rootRendered = true
           Loading.isVisible = true
           hideMenu()
+          light.setEnabled(false)
           setInteractiveLayerLightHouse(container, advancedTexture, scene)
           pageTitle = getGUITitleLightHouse(advancedTexture)
           importLightHouse(scene).then((paperHouse) => {
             createLightHouseEnviroment(scene).then((lightHouseEnv) => {
-              light.setEnabled(false)
               paperHouse.forEach((mesh, i) => {
                 container.meshes.push(mesh)
               })
@@ -297,6 +307,7 @@ export const Create = (engine, scene, canvas, container, report, space_size) => 
           if (light.diffuse !== new BABYLON.Color3.White()) light.diffuse = new BABYLON.Color3.White()
           if (container.meshes.length) console.log(container.meshes.length, 'mesh to remove')
           if (container.lights.length) console.log(container.lights.length, 'lights to remove')
+          if (scene.fogDensity !== 0.01) scene.fogDensity = 0.01
           container.meshes.forEach((element, index) => {
             element.dispose()
           })
@@ -324,7 +335,7 @@ export const Create = (engine, scene, canvas, container, report, space_size) => 
             scene.ambientColor = new BABYLON.Color3(0.25, 0.25, 0.25)
             scene.fogMode = BABYLON.Scene.FOGMODE_EXP
             scene.fogColor = new BABYLON.Color3(0.9, 0.9, 0.8)
-            scene.fogDensity = 0.01
+
             rootRendered = false
           }
           camera.alpha += 0.00075

@@ -7,6 +7,7 @@ export const importCreative = (scene) =>
     BABYLON.SceneLoader.LoadAssetContainer('/assets/models/', `Creativity.obj`, scene, (assets) => {
       assets.addAllToScene()
       assets.meshes.forEach((mesh) => {
+        mesh.position = new BABYLON.Vector3.Zero()
         mesh.rotation.y = -Math.PI / 2
       })
       resolve(assets.meshes)

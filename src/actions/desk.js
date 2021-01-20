@@ -1,14 +1,14 @@
 import * as BABYLON from 'babylonjs'
 import { getGUIDesk } from '../GUI'
 
-export const setInteractiveLayerDesk = (container, advancedTexture, scene, camera) => {
+export const setInteractiveLayerDesk = (container, advancedTexture, scene) => {
   let actionPoint1 = BABYLON.Mesh.CreateSphere('deskActionPoint1', 10.0, 2.5, scene)
   let actionPoint2 = BABYLON.Mesh.CreateSphere('deskActionPoint2', 10.0, 2.5, scene)
   let actionPoint3 = BABYLON.Mesh.CreateBox('deskActionPoint3', 5, scene)
   let actionPoint4 = BABYLON.Mesh.CreateBox('deskActionPoint4', 3, scene)
   let actionPoint5 = BABYLON.Mesh.CreateBox('deskActionPoint5', 5, scene)
   let actionPoint6 = BABYLON.Mesh.CreateBox('deskActionPoint6', 5, scene)
-  let mat0 = new BABYLON.StandardMaterial('mat0', scene)
+  let mat0 = new BABYLON.StandardMaterial('mat0-desk', scene)
 
   actionPoint1.position = new BABYLON.Vector3(-1.5, 5, 3.5)
   actionPoint2.position = new BABYLON.Vector3(1.5, 5, 3.5)
@@ -16,6 +16,7 @@ export const setInteractiveLayerDesk = (container, advancedTexture, scene, camer
   actionPoint4.position = new BABYLON.Vector3(-1.5, 7, -2)
   actionPoint5.position = new BABYLON.Vector3(2.5, 7, -8)
   actionPoint6.position = new BABYLON.Vector3(-2.5, 7, -8)
+
   actionPoint3.scaling = new BABYLON.Vector3(0.2, 1, 1)
   actionPoint4.scaling = new BABYLON.Vector3(0.2, 1, 1)
   actionPoint5.scaling = new BABYLON.Vector3(0.5, 1.5, 0.8)
@@ -48,61 +49,6 @@ export const setInteractiveLayerDesk = (container, advancedTexture, scene, camer
   getGUIDesk(4, actionPoint4, advancedTexture, scene)
   getGUIDesk(5, actionPoint5, advancedTexture, scene)
   getGUIDesk(6, actionPoint6, advancedTexture, scene)
-
-  actionPoint1.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(
-      BABYLON.ActionManager.OnPickTrigger,
-      camera,
-      'target',
-      actionPoint1.position,
-      150
-    )
-  )
-  actionPoint2.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(
-      BABYLON.ActionManager.OnPickTrigger,
-      camera,
-      'target',
-      actionPoint2.position,
-      150
-    )
-  )
-  actionPoint3.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(
-      BABYLON.ActionManager.OnPickTrigger,
-      camera,
-      'target',
-      actionPoint3.position,
-      150
-    )
-  )
-  actionPoint4.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(
-      BABYLON.ActionManager.OnPickTrigger,
-      camera,
-      'target',
-      actionPoint4.position,
-      150
-    )
-  )
-  actionPoint5.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(
-      BABYLON.ActionManager.OnPickTrigger,
-      camera,
-      'target',
-      actionPoint5.position,
-      150
-    )
-  )
-  actionPoint6.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(
-      BABYLON.ActionManager.OnPickTrigger,
-      camera,
-      'target',
-      actionPoint6.position,
-      150
-    )
-  )
 
   container.meshes.push(actionPoint1)
   container.meshes.push(actionPoint2)

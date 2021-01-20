@@ -7,7 +7,7 @@ BABYLON.DefaultLoadingScreen.prototype.displayLoadingUI = function () {
   this._loadingDiv = document.createElement('div')
   this._loadingDiv.id = 'customLoadingScreenDiv'
   this._loadingDiv.innerHTML =
-    'Welcome to Marco Somma personal page.<br/><br/><hr/>Please wait a second,<br/> we are loading Meshes, Texture, Fonts and much more...'
+    'Welcome to <spawn class="loading-name">Marco Somma</spawn> personal page.<br/><br/><hr/>Please wait a second,<br/> we are loading Meshes, Texture, Fonts and much more...'
   var customLoadingScreenCss = document.createElement('style')
   customLoadingScreenCss.type = 'text/css'
   customLoadingScreenCss.innerHTML = `
