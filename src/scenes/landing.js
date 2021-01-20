@@ -161,7 +161,7 @@ const setBtnListeners = (
 
 export const Create = (engine, scene, canvas, container, report, space_size) => {
   const camera = getNewCamera('mainCamera', scene, canvas, space_size)
-  const light = getNewLight('mainLight', scene)
+  const light = getNewLight(scene)
   const advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('LandingUi')
   advancedTexture.idealHeight = 900
   advancedTexture.idealWidth = 1440
@@ -209,11 +209,13 @@ export const Create = (engine, scene, canvas, container, report, space_size) => 
           hideMenu()
           setInteractiveLayerDesk(container, advancedTexture, scene, camera)
           pageTitle = getGUITitleDesk(scene, advancedTexture)
+          light.intensity = 1.5
+          light.diffuse = new BABYLON.Color3.FromHexString('#fbfbfb')
           importDesk(scene).then((desk) => {
-            desk.forEach((mesh) => {
-              container.meshes.push(mesh)
-            })
             createDeskEnviroment(scene).then((deskEnv) => {
+              desk.forEach((mesh) => {
+                container.meshes.push(mesh)
+              })
               deskEnv.meshes.forEach((envMesh) => {
                 container.meshes.push(envMesh)
               })
@@ -262,35 +264,37 @@ export const Create = (engine, scene, canvas, container, report, space_size) => 
           hideMenu()
           setInteractiveLayerLightHouse(container, advancedTexture, scene)
           pageTitle = getGUITitleLightHouse(advancedTexture)
-          createLightHouseEnviroment(scene).then((lightHouseEnv) => {
-            light.setEnabled(false)
-            importLightHouse(scene).then((paperHouse) => {
+          importLightHouse(scene).then((paperHouse) => {
+            createLightHouseEnviroment(scene).then((lightHouseEnv) => {
+              light.setEnabled(false)
               paperHouse.forEach((mesh, i) => {
                 container.meshes.push(mesh)
               })
+              lightHouseEnv.meshes.forEach((envMesh) => {
+                container.meshes.push(envMesh)
+              })
+              lightHouseEnv.lights.forEach((envLight) => {
+                container.lights.push(envLight)
+              })
+              latestBackground = NIGHT_BLUE
+              setChangeColorBackgroundAnimation(
+                'to-lightHouse-animation',
+                new BABYLON.Color3(1, 1, 1),
+                latestBackground,
+                scene
+              )
+              setCameraAnimation(camera, new BABYLON.Vector3(0, 2.1, 30), new BABYLON.Vector3(0, 5, 0))
+              Loading.isVisible = false
+              scene.beginAnimation(camera, 0, 60, false)
+              scene.beginAnimation(scene, 0, 60, false)
             })
-            lightHouseEnv.meshes.forEach((envMesh) => {
-              container.meshes.push(envMesh)
-            })
-            lightHouseEnv.lights.forEach((envLight) => {
-              container.lights.push(envLight)
-            })
-            latestBackground = NIGHT_BLUE
-            setChangeColorBackgroundAnimation(
-              'to-lightHouse-animation',
-              new BABYLON.Color3(1, 1, 1),
-              latestBackground,
-              scene
-            )
-            setCameraAnimation(camera, new BABYLON.Vector3(0, 2.1, 30), new BABYLON.Vector3(0, 5, 0))
-            Loading.isVisible = false
-            scene.beginAnimation(camera, 0, 60, false)
-            scene.beginAnimation(scene, 0, 60, false)
           })
           break
 
         default:
           if (!light.isEnabled()) light.setEnabled(true)
+          if (light.intensity !== 1.2) light.intensity = 1.2
+          if (light.diffuse !== new BABYLON.Color3.White()) light.diffuse = new BABYLON.Color3.White()
           if (container.meshes.length) console.log(container.meshes.length, 'mesh to remove')
           if (container.lights.length) console.log(container.lights.length, 'lights to remove')
           container.meshes.forEach((element, index) => {
@@ -326,7 +330,7 @@ export const Create = (engine, scene, canvas, container, report, space_size) => 
           camera.alpha += 0.00075
           break
       }
-      light.position = camera.position
+      // light.position = camera.position
     })
     scene.ambientColor = new BABYLON.Color3(0.25, 0.25, 0.25)
     scene.fogMode = BABYLON.Scene.FOGMODE_EXP
