@@ -109,7 +109,7 @@ export const getGUICretivity = (index, mesh, advancedTexture, scene) => {
   label.verticalAlignment = labelParams.verticalAlignment
   label.horizontalAlignment = labelParams.horizontalAlignment
   label.zIndex = 1
-  label.top = 80
+  label.top = 40
   label.alpha = 0
   advancedTexture.addControl(label)
 

@@ -227,7 +227,7 @@ export const Create = (engine, scene, canvas, container, report, space_size) => 
                 latestBackground,
                 scene
               )
-              setCameraAnimation(camera, new BABYLON.Vector3(0, 7.5, 30), new BABYLON.Vector3(0, 5, 0))
+              setCameraAnimation(camera, new BABYLON.Vector3(0, 15, 40), new BABYLON.Vector3(0, 5, 0))
               Loading.isVisible = false
               scene.beginAnimation(camera, 0, 60, false)
               scene.beginAnimation(scene, 0, 60, false)
