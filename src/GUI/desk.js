@@ -18,7 +18,7 @@ const getLabelParams = (index) => {
   let params = {}
   switch (index) {
     case 1:
-      params.h = '225px'
+      params.h = '190px'
       params.w = '600px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT
@@ -61,16 +61,16 @@ const getTexts = (index) => {
     case 1:
       text.header = 'Front-End & VideoGames'
       text.mainText =
-        "More than 18 years of experience of HTML and CSS, of course I'm up to date with HTM5 and CSS3 :). I also have 10 years of experience using Javascript, lately useing to ES6 and frameworks like React, BabylonJs and others.\
-      \nI also have some experience developing videogames. At the begin of my carrear I was producing Multimedias Contents for Kid's books, mostly in Flash and ActionScript. Then I get interested in Apple IOS (ObjectiveC) world so I produce a couple of classic Arcade games and try to sell them trhought AppleStore, but I wast a succes :).\
-      \n I Lately get back this passion, mainly using Unity3D to Visualize complex systems and make them easly understandable. Experience leading teams (between 3-8 peoples)"
+        "Several years of experience of HTML and CSS, of course I'm up to date with HTM5 and CSS3. I also have 10 years of experience using Javascript, lately useing to ES6 and frameworks like React, BabylonJs and others.\
+      \nI also have some experience developing videogames. At the begin of my carrear I was producing Multimedias Contents for Kid's books, mostly in Flash and ActionScript. Then I get interested in Apple IOS (ObjectiveC) world so I produce a couple of classic Arcade games and try to sell them trhought AppleStore, but I wast a succes.\
+      \nI Lately get back this passion, mainly using Unity3D to Visualize complex systems and make them easly understandable. Experience leading teams (between 3-8 peoples)"
       break
     case 2:
       text.header = 'Back-End & Infrastructure'
       text.mainText =
         "Partecipating in several project designing and implementing Web and Software infrastructure, I'm latelly getting interested in handling infrastructur clusters using Docker and Kubernates.\
-      \nMostly utilizing Python and Javascript for the backend I'm also quite familiar to tecnologies like RabbitMQ, ElasticSearch, MongoDB, GraphQl. Utilizing mostly Cloud services like AWS (Amazon) and GCP (Google), I alwais like to have CI/CD system in place using CircleCI or GitHub Pipelines.\
-      \nI'm also used to be on charge of the BFF (Backend For Frontend) collecting data from different endpoint and serving them trought RestAPI's. Experience leading teams (between 3-8 peoples)"
+    \nMostly utilizing Python and Javascript for the backend I'm also quite familiar to tecnologies like RabbitMQ, ElasticSearch, MongoDB, GraphQl. Utilizing mostly Cloud services like AWS (Amazon) and GCP (Google), I alwais like to have CI/CD system in place using CircleCI or GitHub Pipelines.\
+    \nI'm also used to be on charge of the BFF (Backend For Frontend) collecting data from different endpoint and serving them trought RestAPI's. Experience leading teams (between 3-8 peoples)"
       break
     case 3:
       text.header = 'Latest certificates'
