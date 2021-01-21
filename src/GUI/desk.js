@@ -1,5 +1,6 @@
 import * as GUI from 'babylonjs-gui'
 import {
+  HEADER_FONT_SIZE,
   SUB_HEADER_FONT_SIZE,
   FONT_SIZE,
   BOLD_FONT,
@@ -17,46 +18,28 @@ const getLabelParams = (index) => {
   let params = {}
   switch (index) {
     case 1:
-      params.h = '280px'
+      params.h = '225px'
       params.w = '600px'
-      params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
+      params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT
       break
     case 2:
-      params.h = '280px'
+      params.h = '190px'
       params.w = '600px'
-      params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
+      params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT
       break
     case 3:
-      params.h = '280px'
-      params.w = '600px'
-      params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
-      params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT
-      break
-    case 4:
-      params.h = '280px'
-      params.w = '600px'
-      params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
-      params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT
-      break
-    case 5:
-      params.h = '280px'
-      params.w = '600px'
-      params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM
-      params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER
-      break
-    case 6:
-      params.h = '280px'
-      params.w = '600px'
+      params.h = '140px'
+      params.w = '840px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER
       break
     default:
       params.h = '280px'
       params.w = '600px'
-      params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER
-      params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT
+      params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM
+      params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER
   }
   return params
 }
@@ -77,27 +60,42 @@ const getTexts = (index) => {
   switch (index) {
     case 1:
       text.header = 'Front-End & VideoGames'
-      text.mainText = ''
+      text.mainText =
+        "More than 18 years of experience of HTML and CSS, of course I'm up to date with HTM5 and CSS3 :). I also have 10 years of experience using Javascript, lately useing to ES6 and frameworks like React, BabylonJs and others.\
+      \nI also have some experience developing videogames. At the begin of my carrear I was producing Multimedias Contents for Kid's books, mostly in Flash and ActionScript. Then I get interested in Apple IOS (ObjectiveC) world so I produce a couple of classic Arcade games and try to sell them trhought AppleStore, but I wast a succes :).\
+      \n I Lately get back this passion, mainly using Unity3D to Visualize complex systems and make them easly understandable. Experience leading teams (between 3-8 peoples)"
       break
     case 2:
       text.header = 'Back-End & Infrastructure'
-      text.mainText = ''
+      text.mainText =
+        "Partecipating in several project designing and implementing Web and Software infrastructure, I'm latelly getting interested in handling infrastructur clusters using Docker and Kubernates.\
+      \nMostly utilizing Python and Javascript for the backend I'm also quite familiar to tecnologies like RabbitMQ, ElasticSearch, MongoDB, GraphQl. Utilizing mostly Cloud services like AWS (Amazon) and GCP (Google), I alwais like to have CI/CD system in place using CircleCI or GitHub Pipelines.\
+      \nI'm also used to be on charge of the BFF (Backend For Frontend) collecting data from different endpoint and serving them trought RestAPI's. Experience leading teams (between 3-8 peoples)"
       break
     case 3:
-      text.header = 'Back-End & Infrastructure Skills'
-      text.mainText = ''
-      break
-    case 4:
-      text.header = 'Front-End & VideoGames Skills'
-      text.mainText = ''
-      break
-    case 5:
-      text.header = 'Certificates'
-      text.mainText = ''
-      break
-    case 6:
-      text.header = 'Projects'
-      text.mainText = ''
+      text.header = 'Latest certificates'
+      text.certificates = [
+        {
+          title: 'UDEMI: AWS Certified Developer Associate',
+          date: '02/2021',
+          url: 'IN PROGRESS',
+        },
+        {
+          title: 'UDEMI: Blender Modeling',
+          date: '01/2021',
+          url: 'https://www.udemy.com/certificate/UC-e11da2cf-af73-411b-ae67-4e441975bdbc/',
+        },
+        {
+          title: 'UDEMI: Docker and Kubernates',
+          date: '12/2020',
+          url: 'https://www.udemy.com/certificate/UC-e11da2cf-af73-411b-ae67-4e441975bdbc/',
+        },
+        {
+          title: 'UDEMI: Unity3D Master Class - Avanced C#',
+          date: '11/2020',
+          url: 'https://www.udemy.com/certificate/UC-e11da2cf-af73-411b-ae67-4e441975bdbc/',
+        },
+      ]
       break
     default:
       text.header = ''
@@ -108,32 +106,61 @@ const getTexts = (index) => {
 
 export const getGUIDesk = (index, mesh, advancedTexture, scene) => {
   let labelParams = getLabelParams(index)
-  let label = getLabel('label-' + mesh.name, labelParams, 1)
+  let label = getLabel('label-' + mesh.name, labelParams, 1, 0)
   advancedTexture.addControl(label)
 
   let texts = getTexts(index)
-  const header = getTextBox(
-    mesh.name + '_textBlock',
-    texts.header,
-    'black',
-    BOLD_FONT,
-    SUB_HEADER_FONT_SIZE,
-    texts.headerMargins,
-    texts.headerAignment
-  )
-  const mainText = getTextBox(
-    mesh.name + '_textBlock',
-    texts.mainText,
-    'black',
-    THINY_FONT,
-    FONT_SIZE,
-    texts.mainTextMargins,
-    texts.mainTextAignment,
-    true
-  )
+  if (index !== 3) {
+    const header = getTextBox(
+      mesh.name + '_textBlock',
+      texts.header,
+      'black',
+      BOLD_FONT,
+      SUB_HEADER_FONT_SIZE,
+      texts.headerMargins,
+      texts.headerAignment
+    )
+    const mainText = getTextBox(
+      mesh.name + '_textBlock',
+      texts.mainText,
+      'black',
+      THINY_FONT,
+      FONT_SIZE,
+      texts.mainTextMargins,
+      texts.mainTextAignment,
+      true
+    )
 
-  label.addControl(header)
-  label.addControl(mainText)
+    label.addControl(header)
+    label.addControl(mainText)
+  } else {
+    const header = getTextBox(
+      mesh.name + '_CERTIFICATES_textBlock',
+      texts.header,
+      'black',
+      BOLD_FONT,
+      HEADER_FONT_SIZE,
+      texts.headerMargins,
+      texts.headerAignment
+    )
+
+    label.addControl(header)
+    texts.certificates.forEach((certificate, i) => {
+      // let top = 10
+      let certificateLine = getTextBox(
+        mesh.name + '_' + i + '_CERTIFICATES_certificateLine_textBlock',
+        `${certificate.date} - ${certificate.title} - Certification URL: ${certificate.url}`,
+        'black',
+        THINY_FONT,
+        FONT_SIZE,
+        { ...texts.mainTextMargins, t: (i + 1.5) * 10 * 2.5 },
+        texts.mainTextAignment
+      )
+
+      label.addControl(certificateLine)
+    })
+  }
+
   let line = getLine(`connect-<${label.id}>-to-<${mesh.id}>`, 'black', label, mesh, advancedTexture)
   let endRound = getGUIDot(`dot-connection-<${label.id}>-to-<${mesh.id}>`, '#b00020', mesh, advancedTexture)
 
