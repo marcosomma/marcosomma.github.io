@@ -8,6 +8,7 @@ import {
   THINY_FONT,
   TITLE_FONT_SIZE,
   SUB_TITLE_FONT_SIZE,
+  getTextBox,
 } from './common'
 
 const getLabelParams = (fileName) => {
@@ -88,23 +89,6 @@ const getTexts = (fileName) => {
   return text
 }
 
-const getTextBox = (text, color, fontWeight, fontSize, margins, alignment) => {
-  let textBox = new GUI.TextBlock()
-  textBox.textWrapping = GUI.TextWrapping.WordWrap
-  textBox.fontFamily = 'Roboto'
-  textBox.fontWeight = fontWeight
-  textBox.fontSize = fontSize
-  textBox.color = color
-  textBox.text = text
-  if (margins.t) textBox.paddingTop = margins.t
-  if (margins.b) textBox.paddingBottom = margins.b
-  if (margins.r) textBox.paddingRight = margins.r
-  if (margins.l) textBox.paddingLeft = margins.l
-  textBox.textVerticalAlignment = alignment.v
-  textBox.textHorizontalAlignment = alignment.h
-  return textBox
-}
-
 export const getGUIBrainPart = (fileName, importedBrainPart, advancedTexture) => {
   let label = new GUI.Rectangle('label for ' + importedBrainPart.name)
   let labelParams = getLabelParams(fileName)
@@ -121,6 +105,7 @@ export const getGUIBrainPart = (fileName, importedBrainPart, advancedTexture) =>
 
   let texts = getTexts(fileName)
   const header = getTextBox(
+    fileName + 'header-textbox',
     texts.header,
     'black',
     BOLD_FONT,
@@ -129,12 +114,14 @@ export const getGUIBrainPart = (fileName, importedBrainPart, advancedTexture) =>
     texts.headerAignment
   )
   const mainText = getTextBox(
+    fileName + 'mainText-textbox',
     texts.mainText,
     'black',
     THINY_FONT,
     FONT_SIZE,
     texts.mainTextMargins,
-    texts.mainTextAignment
+    texts.mainTextAignment,
+    true
   )
 
   // header.onLinesReadyObservable.addOnce(() => {

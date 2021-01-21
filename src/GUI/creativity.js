@@ -1,50 +1,16 @@
 import * as GUI from 'babylonjs-gui'
 import {
-  HEADER_FONT_SIZE,
   SUB_HEADER_FONT_SIZE,
   FONT_SIZE,
   BOLD_FONT,
-  NORMAL_FONT,
   THINY_FONT,
-  TITLE_FONT_SIZE,
   SUB_TITLE_FONT_SIZE,
+  getTextBox,
+  getLabel,
+  getLine,
+  getGUIDot,
+  setMeshActions,
 } from './common'
-
-const getLabelParams = (index) => {
-  let params = {}
-  switch (index) {
-    case 1:
-      params.h = '280px'
-      params.w = '600px'
-      params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
-      params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT
-      break
-    case 2:
-      params.h = '280px'
-      params.w = '600px'
-      params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
-      params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT
-      break
-    case 3:
-      params.h = '280px'
-      params.w = '600px'
-      params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
-      params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT
-      break
-    case 4:
-      params.h = '280px'
-      params.w = '600px'
-      params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
-      params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT
-      break
-    default:
-      params.h = '280px'
-      params.w = '600px'
-      params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER
-      params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT
-  }
-  return params
-}
 
 const getTexts = (index) => {
   let text = {
@@ -61,11 +27,11 @@ const getTexts = (index) => {
   }
   switch (index) {
     case 1:
-      text.header = 'Video Games'
+      text.header = 'Robotic'
       text.mainText = ''
       break
     case 2:
-      text.header = 'Robotic'
+      text.header = 'Video Games'
       text.mainText = ''
       break
     case 3:
@@ -83,34 +49,14 @@ const getTexts = (index) => {
   return text
 }
 
-const getTextBox = (id, text, color, fontWeight, fontSize, margins, alignment) => {
-  let textBox = new GUI.TextBlock(id)
-  textBox.textWrapping = GUI.TextWrapping.WordWrap
-  textBox.fontFamily = 'Roboto'
-  textBox.fontWeight = fontWeight
-  textBox.fontSize = fontSize
-  textBox.color = color
-  textBox.text = text
-  if (margins.t) textBox.paddingTop = margins.t
-  if (margins.b) textBox.paddingBottom = margins.b
-  if (margins.r) textBox.paddingRight = margins.r
-  if (margins.l) textBox.paddingLeft = margins.l
-  textBox.textVerticalAlignment = alignment.v
-  textBox.textHorizontalAlignment = alignment.h
-  return textBox
-}
-
 export const getGUICretivity = (index, mesh, advancedTexture, scene) => {
-  let label = new GUI.Rectangle('label for ' + mesh.name)
-  let labelParams = getLabelParams(index)
-  label.background = '#f1f1f1'
-  label.height = labelParams.h
-  label.width = labelParams.w
-  label.verticalAlignment = labelParams.verticalAlignment
-  label.horizontalAlignment = labelParams.horizontalAlignment
-  label.zIndex = 1
-  label.top = 40
-  label.alpha = 0
+  let labelParams = {
+    h: '200px',
+    w: '600px',
+    verticalAlignment: GUI.Control.VERTICAL_ALIGNMENT_TOP,
+    horizontalAlignment: GUI.Control.HORIZONTAL_ALIGNMENT_CENTER,
+  }
+  let label = getLabel('label-' + mesh.name, labelParams, 1, 0)
   advancedTexture.addControl(label)
 
   let texts = getTexts(index)
@@ -130,61 +76,16 @@ export const getGUICretivity = (index, mesh, advancedTexture, scene) => {
     THINY_FONT,
     FONT_SIZE,
     texts.mainTextMargins,
-    texts.mainTextAignment
+    texts.mainTextAignment,
+    true
   )
 
   label.addControl(header)
   label.addControl(mainText)
+  let line = getLine(`connect-<${label.id}>-to-<${mesh.id}>`, 'black', label, mesh, advancedTexture)
+  let endRound = getGUIDot(`dot-connection-<${label.id}>-to-<${mesh.id}>`, '#b00020', mesh, advancedTexture)
 
-  let line = new GUI.Line()
-  line.lineWidth = 1
-  line.color = 'white'
-  advancedTexture.addControl(line)
-  line.linkWithMesh(mesh)
-  line.connectedControl = label
-  line.alpha = 0
-
-  let endRound = new GUI.Ellipse()
-  endRound.width = '20px'
-  endRound.background = '#018786'
-  endRound.height = '20px'
-  endRound.color = 'black'
-  endRound.thickness = 1
-  endRound.alpha = 0.4
-  advancedTexture.addControl(endRound)
-  endRound.linkWithMesh(mesh)
-
-  mesh.isPickable = true
-  mesh.actionManager = new BABYLON.ActionManager(scene)
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, endRound, 'alpha', 1, 100)
-  )
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, endRound, 'thickness', 2, 100)
-  )
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, label, 'alpha', 1, 100)
-  )
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, line, 'alpha', 1, 100)
-  )
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOutTrigger, endRound, 'alpha', 0.5, 100)
-  )
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOutTrigger, endRound, 'thickness', 1, 100)
-  )
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOutTrigger, label, 'alpha', 0, 100)
-  )
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOutTrigger, line, 'alpha', 0, 100)
-  )
-  mesh.onDisposeObservable.add(() => {
-    endRound.dispose()
-    line.dispose()
-    label.dispose()
-  })
+  setMeshActions(mesh, label, line, endRound, scene)
 }
 
 export const getGUITitleCreativity = (scene, advancedTexture) => {
@@ -221,24 +122,12 @@ export const getGUITitleCreativity = (scene, advancedTexture) => {
     {
       v: GUI.Control.VERTICAL_ALIGNMENT_TOP,
       h: GUI.Control.HORIZONTAL_ALIGNMENT_LEFT,
-    }
-  )
-  const citText = getTextBox(
-    'Creativity-title_textBlock',
-    'Wikipedia',
-    'black',
-    NORMAL_FONT,
-    FONT_SIZE,
-    { t: 195, l: 10, r: 20 },
-    {
-      v: GUI.Control.VERTICAL_ALIGNMENT_TOP,
-      h: GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT,
-    }
+    },
+    true
   )
 
   label.addControl(header)
   label.addControl(mainText)
-  label.addControl(citText)
 
   return [label]
 }

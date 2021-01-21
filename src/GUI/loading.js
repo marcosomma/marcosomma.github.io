@@ -20,6 +20,7 @@ export const getGUILoading = (advancedTexture) => {
   text.fontSize = FONT_SIZE
   text.heightInPixels = 40
   text.lineWidth = NORMAL_FONT
+  text.resizeToFit = true
   text.textVerticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER
   text.textHorizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER
 

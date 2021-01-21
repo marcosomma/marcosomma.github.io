@@ -7,19 +7,24 @@ import {
   NORMAL_FONT,
   THINY_FONT,
   SUB_TITLE_FONT_SIZE,
+  getTextBox,
+  getLabel,
+  getLine,
+  getGUIDot,
+  setMeshActions,
 } from './common'
 
 const getLabelParams = (index) => {
   let params = {}
   switch (index) {
     case 1:
-      params.h = '280px'
+      params.h = '290px'
       params.w = '600px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT
       break
     case 2:
-      params.h = '245px'
+      params.h = '255px'
       params.w = '600px'
       params.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER
       params.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT
@@ -118,35 +123,10 @@ const getTexts = (index) => {
   return text
 }
 
-const getTextBox = (id, text, color, fontWeight, fontSize, margins, alignment) => {
-  let textBox = new GUI.TextBlock(id)
-  textBox.textWrapping = GUI.TextWrapping.WordWrap
-  textBox.fontFamily = 'Roboto'
-  textBox.fontWeight = fontWeight
-  textBox.fontSize = fontSize
-  textBox.color = color
-  textBox.text = text
-  textBox.lineWidth = fontSize
-  if (margins.t) textBox.paddingTop = margins.t
-  if (margins.b) textBox.paddingBottom = margins.b
-  if (margins.r) textBox.paddingRight = margins.r
-  if (margins.l) textBox.paddingLeft = margins.l
-  textBox.textVerticalAlignment = alignment.v
-  textBox.textHorizontalAlignment = alignment.h
-  return textBox
-}
-
 export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
-  let label = new GUI.Rectangle('label for ' + mesh.name)
   let labelParams = getLabelParams(index)
-  label.background = '#f1f1f1'
-  label.height = labelParams.h
-  label.width = labelParams.w
-  label.verticalAlignment = labelParams.verticalAlignment
-  label.horizontalAlignment = labelParams.horizontalAlignment
-  label.zIndex = 1
-  label.top = 80
-  label.alpha = 0
+  let label = getLabel('label-' + mesh.name, labelParams, 1)
+
   advancedTexture.addControl(label)
 
   let texts = getTexts(index)
@@ -161,9 +141,6 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
       texts.headerAignment
     )
 
-    // header.onLinesReadyObservable.addOnce(() => {
-    //   header.fontOffset.height = HEADER_FONT_SIZE * 1.8
-    // })
     label.addControl(header)
     texts.jobs.forEach((job, i) => {
       let top = 50 * (i + 1)
@@ -192,20 +169,8 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
         THINY_FONT,
         FONT_SIZE,
         { ...texts.mainTextMargins, t: texts.mainTextMargins.t * i + 40 + top },
-        texts.headerAignment
+        texts.mainTextAignment
       )
-
-      // title.onLinesReadyObservable.addOnce(() => {
-      //   title.fontOffset.height = SUB_HEADER_FONT_SIZE * 1.8
-      // })
-
-      // company.onLinesReadyObservable.addOnce(() => {
-      //   company.fontOffset.height = FONT_SIZE * 1.8
-      // })
-
-      // description.onLinesReadyObservable.addOnce(() => {
-      //   description.fontOffset.height = FONT_SIZE * 1.8
-      // })
 
       label.addControl(title)
       label.addControl(company)
@@ -228,7 +193,8 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
       THINY_FONT,
       FONT_SIZE,
       texts.mainTextMargins,
-      texts.mainTextAignment
+      texts.mainTextAignment,
+      true
     )
 
     // header.onLinesReadyObservable.addOnce(() => {
@@ -242,55 +208,10 @@ export const getGUILightHouse = (index, mesh, advancedTexture, scene) => {
     label.addControl(header)
     label.addControl(mainText)
   }
-  let line = new GUI.Line()
-  line.lineWidth = 1
-  line.color = 'black'
-  advancedTexture.addControl(line)
-  line.linkWithMesh(mesh)
-  line.connectedControl = label
-  line.alpha = 0
+  let line = getLine(`connect-<${label.id}>-to-<${mesh.id}>`, 'black', label, mesh, advancedTexture)
+  let endRound = getGUIDot(`dot-connection-<${label.id}>-to-<${mesh.id}>`, '#b00020', mesh, advancedTexture)
 
-  let endRound = new GUI.Ellipse()
-  endRound.width = '20px'
-  endRound.background = '#b00020'
-  endRound.height = '20px'
-  endRound.color = 'black'
-  endRound.thickness = 1
-  endRound.alpha = 0.5
-  advancedTexture.addControl(endRound)
-  endRound.linkWithMesh(mesh)
-
-  mesh.isPickable = true
-  mesh.actionManager = new BABYLON.ActionManager(scene)
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, endRound, 'alpha', 1, 100)
-  )
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, endRound, 'thickness', 2, 100)
-  )
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, label, 'alpha', 1, 100)
-  )
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, line, 'alpha', 1, 100)
-  )
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOutTrigger, endRound, 'alpha', 0.5, 100)
-  )
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOutTrigger, endRound, 'thickness', 1, 100)
-  )
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOutTrigger, label, 'alpha', 0, 100)
-  )
-  mesh.actionManager.registerAction(
-    new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOutTrigger, line, 'alpha', 0, 100)
-  )
-  mesh.onDisposeObservable.add(() => {
-    endRound.dispose()
-    line.dispose()
-    label.dispose()
-  })
+  setMeshActions(mesh, label, line, endRound, scene)
 }
 
 export const getGUITitleLightHouse = (advancedTexture) => {
