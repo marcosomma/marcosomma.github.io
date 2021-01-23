@@ -15,5 +15,4 @@ RUN yarn run build
 FROM nginx
 EXPOSE 80
 COPY --from=builder app/dist /usr/share/nginx/html
-RUN --from=builder ls -la ./app/dist
 RUN ls -la /usr/share/nginx/html
