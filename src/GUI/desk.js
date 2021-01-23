@@ -162,7 +162,7 @@ export const getGUIDesk = (index, mesh, advancedTexture, scene) => {
   }
 
   let line = getLine(`connect-<${label.id}>-to-<${mesh.id}>`, 'black', label, mesh, advancedTexture)
-  let endRound = getGUIDot(`dot-connection-<${label.id}>-to-<${mesh.id}>`, '#b00020', mesh, advancedTexture)
+  let endRound = getGUIDot(`dot-connection-<${label.id}>-to-<${mesh.id}>`, '#2000b0', mesh, advancedTexture)
 
   setMeshActions(mesh, label, line, endRound, scene)
 }

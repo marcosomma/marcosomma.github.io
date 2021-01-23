@@ -89,7 +89,7 @@ export const getGUILandingPage = (advancedTexture) => {
   back.paddingRight = 0
   back.thickness = 0
 
-  let contacts = new GUI.TextBlock('marcosomma.work@gmail.com', 'marcosomma.work@gmail.com')
+  let contacts = new GUI.Button.CreateSimpleButton('marcosomma.work@gmail.com', 'marcosomma.work@gmail.com')
   contacts.zIndex = 43
   contacts.color = 'black'
   contacts.fontFamily = 'Roboto'
@@ -97,13 +97,17 @@ export const getGUILandingPage = (advancedTexture) => {
   contacts.fontSize = FONT_SIZE
   contacts.heightInPixels = 50
   contacts.paddingTop = 30
+  contacts.thickness = 0
   contacts.textVerticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
   contacts.textHorizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER
-  contacts.onPointerEnterObservable.add(() => {
+  contacts.onPointerEnterObservable.add((event) => {
     contacts.color = '#018786'
   })
-  contacts.onPointerOutObservable.add(() => {
+  contacts.onPointerOutObservable.add((event) => {
     contacts.color = 'black'
+  })
+  contacts.onPointerClickObservable.add((event) => {
+    window.location.href = 'mailto:marcosomma.work@gmail.com?subject=Contact[marcosomma.gihub.io]'
   })
 
   panel.addControl(preHeader)
