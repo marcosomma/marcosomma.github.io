@@ -4,11 +4,8 @@ language: generic
 services:
   - docker
 
-before_install:
-  - docker build . --tag marcosomma_web:latest
-
 script:
-  - docker run -e CI=true marcosomma_web:latest npm run build
+  - docker build . --tag marcosomma_web:latest
 
 deploy:
   provider: elasticbeanstalk
