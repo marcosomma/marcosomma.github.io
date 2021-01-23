@@ -8,7 +8,7 @@ before_install:
   - docker build . --tag marcosomma_web:latest
 
 script:
-  - docker run -e CI=true marcosomma_web:latest yarn run build
+  - docker run -e CI=true marcosomma_web:latest npm run build
 
 deploy:
   provider: elasticbeanstalk
