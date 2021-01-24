@@ -11,7 +11,7 @@ deploy:
   provider: elasticbeanstalk
   region: 'eu-south-1'
   app: 'marcosomma.github.io'
-  env: 'Marcosommagithubio-env'
+  env: 'Marcosommagithubio-env-1'
   bucket_name: 'elasticbeanstalk-eu-south-1-496050274871'
   bucket_path: 'marcosomma.github.io'
   on:
