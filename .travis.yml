@@ -10,10 +10,10 @@ script:
 deploy:
   provider: elasticbeanstalk
   region: 'eu-south-1'
-  app: 'marcosomma.github.io'
-  env: 'Marcosommagithubio-env-1'
+  app: 'marcosomma.github.io-prod'
+  env: 'Marcosommagithubioprod-env'
   bucket_name: 'elasticbeanstalk-eu-south-1-496050274871'
-  bucket_path: 'marcosomma.github.io'
+  bucket_path: 'marcosomma.github.io-prod'
   on:
     branch: main
   access_key_id: $AWS_ACCESS_KEY
