@@ -26,7 +26,7 @@ module.exports = {
   },
   output: {
     filename: process.env.NODE_ENV === 'production' ? '[name].[contenthash].js' : '[name].js',
-    path: __dirname + '/dist',
+    path: __dirname + '/docs',
   },
   performance: {
     hints: false,
@@ -48,7 +48,7 @@ module.exports = {
         },
         {
           from: __dirname + '/src/assets/',
-          to: __dirname + '/dist/assets',
+          to: __dirname + '/docs/assets',
         },
       ],
     }),
@@ -58,7 +58,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: process.env.NODE_ENV === 'production' ? true : false,
-      template: __dirname + process.env.NODE_ENV === 'production' ? '/dist/index.html' : 'src/index_dev.html',
+      template: __dirname + process.env.NODE_ENV === 'production' ? '/docs/index.html' : 'src/index_dev.html',
     }),
   ],
   resolve: {
