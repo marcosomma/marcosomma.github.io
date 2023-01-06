@@ -1,0 +1,125 @@
+# Blender MTL File: 'creativity.blend'
+# Material Count: 11
+
+newmtl Controller
+Ns 575.999996
+Ka 1.000000 1.000000 1.000000
+Kd 0.247712 0.247712 0.247712
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump texture/controller_Normal_1024.png
+map_Kd texture/controller_BaseColor_1024.png
+
+newmtl None
+Ns 500.000001
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl blck_metal
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Bump texture/TexturesCom_CorrodedMetal_512_normal.png
+map_Kd texture/TexturesCom_CorrodedMetal_512_metallic.png
+
+newmtl cb_mat_01
+Ns 10.000002
+Ka 1.000000 1.000000 1.000000
+Kd 0.588200 0.588200 0.588200
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd texture/cb_diff_06.jpg
+
+newmtl chrome
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Bump texture/TexturesCom_CorrodedMetal_512_normal.png
+map_Kd texture/TexturesCom_CorrodedMetal_512_metallic.png
+
+newmtl corda
+Ns 263.324371
+Ka 0.940909 0.940909 0.940909
+Kd 0.277737 0.277737 0.277737
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+
+newmtl manico
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump texture/TexturesCom_Wood_Wenge_512_normal.png
+map_Kd texture/TexturesCom_Wood_Wenge_512_albedo.png
+
+newmtl pallini
+Ns 671.281565
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.492726 0.502889
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd texture/TexturesCom_CorrodedMetal_512_albedo.png
+
+newmtl tasti
+Ns 562.983458
+Ka 0.904545 0.904545 0.904545
+Kd 0.845074 0.721882 0.514901
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+
+newmtl wire_204204204.001
+Ns 31.999996
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.350000 0.350000 0.350000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd texture/Yashica.png
+
+newmtl wood
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump texture/TexturesCom_Wood_Wenge_512_normal.png
+map_Kd texture/TexturesCom_Wood_Wenge_512_albedo.png
