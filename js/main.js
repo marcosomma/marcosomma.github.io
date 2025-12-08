@@ -8,7 +8,7 @@ let searchQuery = '';
 function setRandomHeader() {
     const totalHeaders = 36; // header_0.png to header_35.png + header.png
     const randomIndex = Math.floor(Math.random() * totalHeaders);
-    const headerPath = `./images/headers/header_${randomIndex - 1}.png`;
+    const headerPath = `./images/headers/header_${randomIndex}.png`;
     
     const heroImage = document.getElementById('hero-image');
     if (heroImage) {
