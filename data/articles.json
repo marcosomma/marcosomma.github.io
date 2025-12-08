@@ -1,0 +1,74 @@
+{
+  "articles": [
+    {
+      "id": "maybe-i-just-do-not-get-it",
+      "title": "Maybe I Just Do Not Get It",
+      "date": "2025-12-05",
+      "excerpt": "Reflections on understanding complex concepts and the importance of asking questions.",
+      "tags": ["thoughts"],
+      "type": "external",
+      "url": "https://dev.to/marcosomma/maybe-i-just-do-not-get-it-5e3f",
+      "source": "dev.to"
+    },
+    {
+      "id": "orchestration-loops-for-llm-agents",
+      "title": "How to Design Two Practical Orchestration Loops for LLM Agents",
+      "date": "2025-12-08",
+      "excerpt": "Practical patterns for orchestrating LLM agents with structured workflows and feedback loops.",
+      "tags": ["AI", "engineering"],
+      "type": "external",
+      "url": "https://dev.to/marcosomma/how-to-design-two-practical-orchestration-loops-for-llm-agents-513k",
+      "source": "dev.to"
+    },
+    {
+      "id": "binary-weighted-evaluations",
+      "title": "Binary Weighted Evaluations: How to",
+      "date": "2025-12-07",
+      "excerpt": "A practical approach to evaluating complex decisions using binary weighted scoring systems.",
+      "tags": ["engineering"],
+      "type": "external",
+      "url": "https://dev.to/marcosomma/binary-weighted-evaluationshow-to-1a1p",
+      "source": "dev.to"
+    },
+    {
+      "id": "veterinary-ai-workflow",
+      "title": "Veterinary AI Workflow with OrKa: Specialist Orchestration & Structured JSON",
+      "date": "2025-11-29",
+      "excerpt": "Building observable AI workflows for veterinary diagnosis using OrKa's specialist orchestration.",
+      "tags": ["AI", "OrKa"],
+      "type": "external",
+      "url": "https://dev.to/marcosomma/veterinary-ai-workflow-with-orka-specialist-orchestration-structured-json-input-and-observable-2hho",
+      "source": "dev.to"
+    },
+    {
+      "id": "orka-reasoning-math-powerhouse",
+      "title": "From 77% to 92%: How OrKa Reasoning Turns GPT-OSS20B Into a Math Powerhouse",
+      "date": "2025-09-05",
+      "excerpt": "Demonstrating how OrKa's reasoning framework dramatically improves mathematical problem-solving capabilities.",
+      "tags": ["AI", "OrKa"],
+      "type": "external",
+      "url": "https://dev.to/marcosomma/from-77-to-92-how-orka-reasoning-turns-gpt-oss20b-into-a-math-reasoning-powerhouse-24ac",
+      "source": "dev.to"
+    },
+    {
+      "id": "no-agi-is-not-near",
+      "title": "No, AGI Is Not Near (And That Chart Scares Me for All the Wrong Reasons)",
+      "date": "2025-07-11",
+      "excerpt": "A critical analysis of AGI predictions and the misleading narratives surrounding artificial intelligence progress.",
+      "tags": ["AI", "thoughts"],
+      "type": "external",
+      "url": "https://dev.to/marcosomma/no-agi-is-not-near-and-that-chart-scares-me-for-all-the-wrong-reasons-45m3",
+      "source": "dev.to"
+    },
+    {
+      "id": "ai-agents-structured-debate",
+      "title": "How AI Agents Learned to Agree Through Structured Debate",
+      "date": "2025-07-13",
+      "excerpt": "Exploring how structured debate mechanisms enable AI agents to reach consensus and improve decision-making.",
+      "tags": ["AI", "engineering"],
+      "type": "external",
+      "url": "https://dev.to/marcosomma/how-ai-agents-learned-to-agree-through-structured-debate-1gk0",
+      "source": "dev.to"
+    }
+  ]
+}

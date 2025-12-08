@@ -1,0 +1,29 @@
+{
+  "projects": [
+    {
+      "name": "OrKa",
+      "repo": "marcosomma/orka-reasoning",
+      "description": "Modular cognitive reasoning architecture for LLM orchestration with explicit memory layers and deterministic agent graphs.",
+      "url": "https://github.com/marcosomma/orka-reasoning",
+      "website": "https://orkacore.com",
+      "tags": ["AI", "Python", "LLM"],
+      "stars": 70
+    },
+    {
+      "name": "Local DeepSeek Chat Interface",
+      "repo": "marcosomma/LocalDeepSeekChatInterface",
+      "description": "Local chat interface for DeepSeek models with custom UI and conversation management.",
+      "url": "https://github.com/marcosomma/LocalDeepSeekChatInterface",
+      "tags": ["AI", "Chat", "UI"],
+      "stars": 5
+    },
+    {
+      "name": "Ant Simulation",
+      "repo": "marcosomma/ant-sim",
+      "description": "Ant colony simulation exploring emergent behavior and swarm intelligence patterns.",
+      "url": "https://github.com/marcosomma/ant-sim",
+      "tags": ["Simulation", "Python"],
+      "stars": 14
+    }
+  ]
+}
